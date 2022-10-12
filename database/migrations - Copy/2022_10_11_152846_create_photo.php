@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('photo', function (Blueprint $table) {
             $table->id();
             $table->string('photo_url');
-            $table->integer('post_id')->nullable();
-            $table->integer('service_id')->nullable();
-            $table->integer('group_activity_id')->nullable();
+            $table->foreignId('post_id')->nullable()->references('id')->on('post')->onDelete('cascade');
+            $table->foreignId('service_id')->nullable()->references('id')->on('service')->onDelete('cascade');
+            $table->foreignId('group_activity_id')->nullable()->references('id')->on('group_activity')->onDelete('cascade');
         });
     }
 

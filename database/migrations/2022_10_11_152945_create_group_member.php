@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('group_member', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('email');
+            $table->enum('gender', ['men', 'woman']);
+            $table->integer('age');
+            $table->string('name');
+            $table->string('surname');
+            $table->string('phone_number');
+            $table->foreignId('group_id')->nullable()->constrained('group');
         });
     }
 

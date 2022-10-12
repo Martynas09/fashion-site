@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('group_activity', function (Blueprint $table) {
+        Schema::create('group', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('description');
-            $table->integer('size');
-            $table->integer('free_spaces');
+            $table->string('name');
+            $table->foreignId('group_activity_id')->references('id')->on('group_activity')->onDelete('cascade');
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('group_activity');
+        Schema::dropIfExists('group');
     }
 };

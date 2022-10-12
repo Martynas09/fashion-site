@@ -13,9 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('group', function (Blueprint $table) {
+        Schema::create('group_member', function (Blueprint $table) {
             $table->id();
+            $table->string('email');
+            $table->enum('gender', ['men', 'woman']);
+            $table->integer('age');
             $table->string('name');
+            $table->string('surname');
+            $table->string('phone_number');
+            $table->foreignId('group_id')->references('id')->on('group')->onDelete('cascade');
         });
     }
 
@@ -26,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('group');
+        Schema::dropIfExists('group_member');
     }
 };
