@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\photoController;
+use App\Http\Controllers\serviceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('main');
 });
+Route::get('/services', [serviceController::class, 'showServices']);
+Route::get('/upload', [photoController::class, 'create']);
+Route::post('/upload', [photoController::class, 'store']);
+Route::get('/viewService/{id}', [serviceController::class, 'viewService']);
+
