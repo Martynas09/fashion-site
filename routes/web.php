@@ -18,8 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('main');
 });
+//Services
 Route::get('/services', [serviceController::class, 'showServices']);
-Route::get('/upload', [photoController::class, 'create']);
-Route::post('/upload', [photoController::class, 'store']);
+Route::get('/addService', [serviceController::class, 'viewCreate']);
+Route::post('/addService', [serviceController::class, 'store']);
 Route::get('/viewService/{id}', [serviceController::class, 'viewService']);
 

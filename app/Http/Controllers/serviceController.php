@@ -16,7 +16,42 @@ class serviceController extends Controller
     public function viewService($id)
     {
         $service = service::where('id', $id)->get();
-        $photos = photo::where('service_id', $id)->get();
-        return view('viewService', ['service' => $service, 'photos' => $photos]);
+        return view('viewService', ['service' => $service]);
+    }
+    public function viewCreate()
+    {
+        return view('addService');
+    }
+
+    public function store(Request $request)
+    {
+        request()->validate([
+            'title' => 'required',
+            'photo_url' => 'required',
+            'photo_url.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'price' => 'required',
+            'description' => 'required',
+
+        ]);
+        $service = new service();
+        $service->title = request('title');
+        $service->description = request('description');
+        $service->price = request('price');
+        $service->save();
+
+        if($request->hasfile('photo_url'))
+        {
+            foreach($request->file('photo_url') as $image)
+            {
+                $name=$image->getClientOriginalName();
+                $image->move(public_path().'/images/', $name);
+                $form= new photo();
+                $form->photo_url=$name;
+                $form->service_id=$service->id;
+                $form->save();
+            }
+        }
+
+        return redirect('/services');
     }
 }

@@ -2,12 +2,13 @@
 @section('content')
 
     <section class="bg-gray-100 border rounded-lg drop-shadow-md lg:w-[80rem] sm:w-[10rem] h-[800px] mt-2">
+        @if($service[0]->photos->count()>1)
     <div class="max-w-2xl w-[80rem] h-[50rem] ml-5 mt-10">
         <div id="default-carousel" class="relative mb-4 mt-4 ml-4" data-carousel="static">
             <!-- Carousel wrapper -->
             <div class="overflow-hidden relative h-56 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
                 <!-- Item 1 -->
-                @foreach($photos as $photo)
+                @foreach($service[0]->photos as $photo)
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
                         <img src="/images/{{$photo->photo_url}}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
                     </div>
@@ -15,7 +16,7 @@
             </div>
             <!-- Slider indicators -->
             <div class="flex absolute bottom-5 left-1/2 z-30 space-x-3 -translate-x-1/2">
-            @foreach($photos as $photo)
+            @foreach($service[0]->photos as $photo)
                     <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1" data-carousel-slide-to="0"></button>
             @endforeach
             </div>
@@ -33,6 +34,11 @@
         </span>
             </button>
         </div>
+        @else
+            <div class="max-w-2xl w-[80rem] h-[50rem] ml-5 mt-10 relative mb-4 mt-4 ml-4 overflow-hidden relative h-56 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
+                <img src="/images/{{$service[0]->photos[0]->photo_url}}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
+            </div>
+        @endif
         <div class="relative mt-6 lg:w-1/2 lg:mt-0 lg:mx-6 ">
             <a href="#" class="block mt-4 text-2xl font-semibold text-gray-800 hover:underline md:text-3xl">
                 {{$service[0]->title}}

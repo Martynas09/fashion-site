@@ -9,4 +9,9 @@ class group_activity extends Model
 {
     protected $table = 'group_activity';
     public $timestamps = false;
+
+    public function photos()
+    {
+        return $this->hasMany(photo::class);
+    }
 }
