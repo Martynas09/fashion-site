@@ -23,7 +23,7 @@ class serviceController extends Controller
         return view('addService');
     }
 
-    public function store(Request $request)
+    public function createService(Request $request)
     {
         request()->validate([
             'title' => 'required',
@@ -54,4 +54,13 @@ class serviceController extends Controller
 
         return redirect('/services');
     }
+    public function editService($id)
+    {
+
+    }
+    public function removeService($id)
+    {
+
+    }
+
 }

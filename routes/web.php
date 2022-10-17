@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\photoController;
 use App\Http\Controllers\serviceController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +20,6 @@ Route::get('/', function () {
 //Services
 Route::get('/services', [serviceController::class, 'showServices']);
 Route::get('/addService', [serviceController::class, 'viewCreate']);
-Route::post('/addService', [serviceController::class, 'store']);
+Route::post('/addService', [serviceController::class, 'createService']);
 Route::get('/viewService/{id}', [serviceController::class, 'viewService']);
 
