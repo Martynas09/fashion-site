@@ -71,5 +71,8 @@
 <div class="flex justify-center mt-28">
     @yield('content')
 </div>
+<div>
+    <h5 class="absolute mt-4 left-0 bottom-0 pl-2 pb-1 text-sm text-gray-500 dark:text-white">© TAVO KODAS 2022</h5>
+</div>
 </body>
 </html>
