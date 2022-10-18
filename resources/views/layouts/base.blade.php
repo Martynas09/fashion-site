@@ -35,9 +35,8 @@
     <div class="flex items-center">
         <!-- Logo -->
         <a href="/" class="cursor-pointer">
-            <h3 class="text-2xl font-medium text-blue-500">
-                <img class="h-10 object-cover"
-                     src="https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.svg">
+                <img class="h-12 object-cover"
+                     src="/logo.png">
             </h3>
         </a>
     </div>
@@ -69,7 +68,7 @@
         </a>
     </div>
 </nav>
-<div class="flex flex-col items-center mt-24">
+<div class="flex justify-center mt-28">
     @yield('content')
 </div>
 </body>

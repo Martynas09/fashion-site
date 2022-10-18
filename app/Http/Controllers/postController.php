@@ -14,6 +14,12 @@ class postController extends Controller
     public function viewPost($id){
 
     }
+    public function viewAddPost(){
+
+    }
+    public function addPost(Request $request){
+
+    }
     public function editPost($id){
 
     }
