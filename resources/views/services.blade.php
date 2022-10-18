@@ -1,8 +1,9 @@
 @extends('layouts.base')
 @section('content')
-
+    <div class="">
+    <div class="grid gap-16 mt-12 grid-cols-1">
             @foreach($services as $service)
-            <section class="bg-gray-100 border rounded-lg drop-shadow-md lg:w-[80rem] sm:w-[10rem]">
+            <div class="bg-gray-100 border rounded-lg drop-shadow-md lg:w-[80rem] sm:w-[10rem]">
                 <div class="container px-6 py-10 mx-auto">
                     <div class="lg:-mx-6 lg:flex">
                         <img class="object-cover w-56 lg:mx-6 lg:w-1/2 rounded-xl h-72 lg:h-96" src="/images/{{$service->photos[0]->photo_url}}">
@@ -25,7 +26,8 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
             @endforeach
-
+    </div>
+    </div>
 @endsection
