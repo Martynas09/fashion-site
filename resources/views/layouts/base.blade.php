@@ -95,9 +95,9 @@
 <div class="flex justify-center mt-24">
     @yield('content')
 </div>
-<div>
+<footer>
     <a class="lg:absolute left-0 bottom-0 mt-4 pl-2 text-sm text-gray-500 dark:text-white">© TAVO KODAS 2022</a>
-</div>
+</footer>
 </body>
 </html>
 
