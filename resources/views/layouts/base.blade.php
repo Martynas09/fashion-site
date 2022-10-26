@@ -96,7 +96,7 @@
     @yield('content')
 </div>
 <footer>
-    <a class="lg:absolute left-0 bottom-0 mt-4 pl-2 text-sm text-gray-500 dark:text-white">© TAVO KODAS 2022</a>
+    <a class="fixed left-0 bottom-0 mt-4 pl-2 text-sm text-gray-500 dark:text-white">© TAVO KODAS 2022</a>
 </footer>
 </body>
 </html>
