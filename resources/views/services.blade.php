@@ -2,7 +2,7 @@
 @section('content')
     <div class="grid mt-6 grid-cols-1">
             @foreach($services as $service)
-            <div class="bg-gray-50 border drop-shadow-md lg:w-[80rem] sm:w-[10rem] mb-10">
+            <div class="bg-gray-50 border drop-shadow-md md:w-[80rem] sm:w-[10rem] mb-9">
                 <div class="container px-6 py-10 mx-auto">
                     <div class="lg:-mx-6 lg:flex">
                         <img class="object-cover sm:w-56 lg:mx-6 lg:w-1/2 sm:h-45 lg:h-72" src="/images/{{$service->photos[0]->photo_url}}">

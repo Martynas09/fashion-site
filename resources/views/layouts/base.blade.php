@@ -41,28 +41,28 @@
         </a>
     </div>
     <!-- Links Section -->
-    <div class="items-center hidden space-x-8 lg:flex">
-        <a href="/" class="flex text-gray-600 hover:text-black
-                    cursor-pointer transition-colors duration-300">
+    <div class="items-center hidden lg:flex">
+        <a href="/" class="flex hover:text-black px-4 py-2
+                    cursor-pointer transition-colors duration-300 {{Route::current()->uri() == '/' ? 'border border-black text-black' : 'text-gray-600'}}">
             Pagrindinis
         </a>
 
-        <a href="/services" class="flex text-gray-600 hover:text-black
-                    cursor-pointer transition-colors duration-300">
+        <a href="/services" class="flex hover:text-black px-4 py-2
+                    cursor-pointer transition-colors duration-300 {{Route::current()->uri() == 'services' ? 'border border-black text-black' : 'text-gray-600'}}">
             Paslaugos
         </a>
 
-        <a class="flex text-gray-600 hover:text-black
+        <a class="flex text-gray-600 hover:text-black px-4 py-2
                     cursor-pointer transition-colors duration-300">
             Grupinės veiklos
         </a>
 
-        <a class="flex text-gray-600 hover:text-black
+        <a class="flex text-gray-600 hover:text-black px-4 py-2
                     cursor-pointer transition-colors duration-300">
             Įrašai
         </a>
 
-        <a class="flex text-gray-600 hover:text-black
+        <a class="flex text-gray-600 hover:text-black px-4 py-2
                     cursor-pointer transition-colors duration-300">
             Apie
         </a>
@@ -73,10 +73,10 @@
         <div id="dropdown" class="hidden z-20 w-[1000px] bg-white shadow-md rounded divide-y divide-gray-100 shadow dark:bg-gray-700" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 310px);" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom">
             <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownDefault">
                 <li>
-                    <a href="/" class="block py-2 px-4 hover:bg-gray-100">Pagrindinis</a>
+                    <a href="/" class="block py-2 px-4 hover:bg-gray-100 {{Route::current()->uri() == '/' ? 'font-bold' : ''}}">Pagrindinis</a>
                 </li>
                 <li>
-                    <a href="/services" class="block py-2 px-4 hover:bg-gray-100">Paslaugos</a>
+                    <a href="/services" class="block py-2 px-4 hover:bg-gray-100 {{Route::current()->uri() == 'services' ? 'font-bold' : ''}}">Paslaugos</a>
                 </li>
                 <li>
                     <a href="#" class="block py-2 px-4 hover:bg-gray-100 ">Grupinės veiklos</a>

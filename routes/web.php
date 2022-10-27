@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\mainController;
 use App\Http\Controllers\serviceController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('main');
-});
+//Main
+Route::get('/', [mainController::class, 'showMain']);
+
 //Services
 Route::get('/services', [serviceController::class, 'showServices']);
 Route::get('/addService', [serviceController::class, 'viewCreate']);
