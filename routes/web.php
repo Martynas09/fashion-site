@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\groupActivityController;
 use App\Http\Controllers\mainController;
 use App\Http\Controllers\serviceController;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +25,6 @@ Route::get('/addService', [serviceController::class, 'viewCreate']);
 Route::post('/addService', [serviceController::class, 'createService']);
 Route::get('/viewService/{id}', [serviceController::class, 'viewService']);
 
+//Group activities
+Route::get('/groupActivities', [groupActivityController::class, 'viewActivities']);
+Route::get('/viewGroupActivity/{id}', [groupActivityController::class, 'viewActivity']);

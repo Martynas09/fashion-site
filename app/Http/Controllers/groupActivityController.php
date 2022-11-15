@@ -9,10 +9,12 @@ use App\Models\photo;
 class groupActivityController extends Controller
 {
     public function viewActivities(){
-
+        $groupActivities = group_activity::all();
+        return view('groupActivities', ['groupActivities' => $groupActivities]);
     }
     public function viewActivity($id){
-
+        $groupActivity = group_activity::where('id', $id)->get();
+        return view('viewGroupActivity', ['groupActivity' => $groupActivity]);
     }
     public function editActivity($id){
 
@@ -23,4 +25,5 @@ class groupActivityController extends Controller
     public function removeActivity($id){
 
     }
+
 }
