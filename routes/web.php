@@ -28,3 +28,8 @@ Route::get('/viewService/{id}', [serviceController::class, 'viewService']);
 //Group activities
 Route::get('/groupActivities', [groupActivityController::class, 'viewActivities']);
 Route::get('/viewGroupActivity/{id}', [groupActivityController::class, 'viewActivity']);
+Route::get('/addActivity', [groupActivityController::class, 'viewCreate']);
+Route::post('/addActivity', [groupActivityController::class, 'createActivity']);
+Route::get('/registerActivity/{id}', [groupActivityController::class, 'viewRegister']);
+Route::post('/registerActivity/{id}', [groupActivityController::class, 'createGroupMemeber']);
+

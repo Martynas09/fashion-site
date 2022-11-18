@@ -11,16 +11,16 @@ class serviceController extends Controller
     public function showServices()
     {
         $services = service::all();
-        return view('services', ['services' => $services]);
+        return view('Services', ['services' => $services]);
     }
     public function viewService($id)
     {
         $service = service::where('id', $id)->get();
-        return view('viewService', ['service' => $service]);
+        return view('ServiceView', ['service' => $service]);
     }
     public function viewCreate()
     {
-        return view('addService');
+        return view('ServiceAdd');
     }
 
     public function createService(Request $request)

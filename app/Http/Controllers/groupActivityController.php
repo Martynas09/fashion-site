@@ -2,28 +2,119 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\group;
+use App\Models\group_member;
 use Illuminate\Http\Request;
 use App\Models\group_activity;
 use App\Models\photo;
 
 class groupActivityController extends Controller
 {
-    public function viewActivities(){
+    public function viewActivities()
+    {
         $groupActivities = group_activity::all();
-        return view('groupActivities', ['groupActivities' => $groupActivities]);
+        return view('GroupActivities', ['groupActivities' => $groupActivities]);
     }
-    public function viewActivity($id){
+
+    public function viewActivity($id)
+    {
         $groupActivity = group_activity::where('id', $id)->get();
-        return view('viewGroupActivity', ['groupActivity' => $groupActivity]);
+        return view('GroupActivityView', ['groupActivity' => $groupActivity]);
     }
-    public function editActivity($id){
+
+    public function editActivity($id)
+    {
 
     }
-    public function createActivity(Request $request){
+    public function viewCreate()
+    {
+        return view('GroupActivityAdd');
+    }
+
+    public function createActivity(Request $request)
+    {
+
+        request()->validate([
+            'title' => 'required',
+            'photo_url' => 'required',
+            'photo_url.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'size' => 'required',
+            'description' => 'required',
+
+        ]);
+
+        $activity = new group_activity();
+        $activity->title = request('title');
+        $activity->description = request('description');
+        $activity->size = request('size');
+        $activity->free_spaces = request('size');
+        $activity->save();
+
+        $group = new group();
+        $group->name=request('title');
+        $group->group_activity_id = $activity->id;
+        $group->save();
+
+        if ($request->hasfile('photo_url')) {
+            foreach ($request->file('photo_url') as $image) {
+                $name = $image->getClientOriginalName();
+                $image->move(public_path() . '/images/', $name);
+                $form = new photo();
+                $form->photo_url = $name;
+                $form->group_activity_id = $activity->id;
+                $form->save();
+            }
+        }
+
+        return redirect('/groupActivities');
+    }
+    public function viewRegister($id)
+    {
+        $groupActivity = group_activity::where('id', $id)->get();
+        return view('GroupActivityRegister', ['groupActivity' => $groupActivity]);
+    }
+    public function createGroupMemeber($id)
+    {
+        request()->validate([
+            'name' => 'required',
+            'surname' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+            'gender' => 'required',
+            'age' => 'required',
+        ]);
+        $group = group::where('group_activity_id', $id)->first();
+        $groupMember = new group_member();
+        $groupMember->name = request('name');
+        $groupMember->surname = request('surname');
+        $groupMember->email = request('email');
+        $groupMember->phone_number = request('phone_number');
+        $groupMember->gender = request('gender');
+        $groupMember->age = request('age');
+        $groupMember->group_id = $group->id;
+        $groupMember->save();
+
+
+        $groupActivity = group_activity::where('id', $id)->first();
+        $groupActivity->free_spaces = $groupActivity->free_spaces - 1;
+        $groupActivity->save();
+
+
+
+        return redirect('/viewGroupActivity/' . $id);
+    }
+    public function deleteActivity($id)
+    {
 
     }
-    public function removeActivity($id){
 
+    public function removeActivity($id)
+    {
+        $group=group::where('group_activity_id',$id)->get();
+        $groupActivity = group_activity::where('id', $id)->get();
+        $groupActivity->delete();
+        $group->delete();
+        return redirect('/groupActivities');
     }
 
 }
