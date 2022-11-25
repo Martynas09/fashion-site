@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\groupActivityController;
 use App\Http\Controllers\mainController;
+use App\Http\Controllers\postController;
 use App\Http\Controllers\serviceController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,4 +33,8 @@ Route::get('/addActivity', [groupActivityController::class, 'viewCreate']);
 Route::post('/addActivity', [groupActivityController::class, 'createActivity']);
 Route::get('/registerActivity/{id}', [groupActivityController::class, 'viewRegister']);
 Route::post('/registerActivity/{id}', [groupActivityController::class, 'createGroupMemeber']);
+
+//Posts
+Route::get('/posts', [postController::class, 'viewPosts']);
+Route::get('/viewPost/{id}', [postController::class, 'viewPost']);
 
