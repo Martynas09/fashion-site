@@ -12,4 +12,8 @@ class mainController extends Controller
         $posts = post::orderBy('created_at', 'desc')->take(2)->get();
         return view('main', ['posts' => $posts]);
     }
+    public function showAboutUs()
+    {
+        return view('About');
+    }
 }

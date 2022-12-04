@@ -57,13 +57,13 @@
             Grupinės veiklos
         </a>
 
-        <a class="flex text-gray-600 hover:text-black px-4 py-2
-                    cursor-pointer transition-colors duration-300">
+        <a href="/posts" class="flex text-gray-600 hover:text-black px-4 py-2
+                    cursor-pointer transition-colors duration-300 {{Route::current()->uri() == 'posts' ? 'border border-black text-black' : 'text-gray-600'}}">
             Įrašai
         </a>
 
-        <a class="flex text-gray-600 hover:text-black px-4 py-2
-                    cursor-pointer transition-colors duration-300">
+        <a href="/about" class="flex text-gray-600 hover:text-black px-4 py-2
+                    cursor-pointer transition-colors duration-300 {{Route::current()->uri() == 'about' ? 'border border-black text-black' : 'text-gray-600'}}">
             Apie
         </a>
     </div>

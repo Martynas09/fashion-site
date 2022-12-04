@@ -6,7 +6,7 @@
                 class=" bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 mb-10">
                 <div class="pl-5 py-2 text-xl flex items-center">
                     <img class="w-12 h-12 rounded-full shadow-lg"
-                         src="https://scontent.fkun1-1.fna.fbcdn.net/v/t39.30808-6/299860188_570161441500120_3982606328030466712_n.png?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=XooCt1jipkoAX_o1V2H&tn=eIdebY05lpK99fKt&_nc_ht=scontent.fkun1-1.fna&oh=00_AfA5AF6vEmBY_zpTV2b-b7EZl7AqdupRwNGV9Mw-Xr2ZBQ&oe=6386EDC2"/>
+                         src="/images/profilepic.png"/>
                     <div class="pl-2">Tavo kodas administracija
                     <h5 class="text-sm tracking-tight text-gray-500 dark:text-white">{{$post->created_at}}</h5></div>
                 </div>

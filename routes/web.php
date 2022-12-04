@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\adminController;
 use App\Http\Controllers\groupActivityController;
 use App\Http\Controllers\mainController;
 use App\Http\Controllers\postController;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 //Main
 Route::get('/', [mainController::class, 'showMain']);
+Route::get('/about', [mainController::class, 'showAboutUs']);
 
 //Services
 Route::get('/services', [serviceController::class, 'showServices']);
@@ -37,4 +39,10 @@ Route::post('/registerActivity/{id}', [groupActivityController::class, 'createGr
 //Posts
 Route::get('/posts', [postController::class, 'viewPosts']);
 Route::get('/viewPost/{id}', [postController::class, 'viewPost']);
+
+//Admin
+Route::get('/admin', [adminController::class, 'showLogin']);
+Route::get('/logout', [adminController::class, 'logout']);
+Route::post('/admin', [adminController::class, 'signIn']);
+
 
