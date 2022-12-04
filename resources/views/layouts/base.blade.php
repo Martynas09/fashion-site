@@ -66,6 +66,12 @@
                     cursor-pointer transition-colors duration-300 {{Route::current()->uri() == 'about' ? 'border border-black text-black' : 'text-gray-600'}}">
             Apie
         </a>
+        @if(session('role')=="admin")
+            <a href="/logout" class="flex text-gray-600 font-bold hover:text-black px-4 py-2
+                    cursor-pointer transition-colors duration-300">
+                Atsijungti
+            </a>
+        @endif
     </div>
     <div class="md:hidden">
         <button id="dropdownDefault" data-dropdown-toggle="dropdown" class="text-gray-600 hover:bg-gray-200 focus:outline-none font-medium text-sm px-4 py-2.5 text-center inline-flex items-center" type="button"><svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg></button>
@@ -82,11 +88,16 @@
                     <a href="/groupActivities" class="block py-2 px-4 hover:bg-gray-100 {{Route::current()->uri() == 'groupActivities' ? 'font-bold' : ''}}">Grupinės veiklos</a>
                 </li>
                 <li>
-                    <a href="#" class="block py-2 px-4 hover:bg-gray-100">Įrašai</a>
+                    <a href="/posts" class="block py-2 px-4 hover:bg-gray-100 {{Route::current()->uri() == 'posts' ? 'font-bold' : ''}}">Įrašai</a>
                 </li>
                 <li>
-                    <a href="#" class="block py-2 px-4 hover:bg-gray-100">Apie</a>
+                    <a href="/about" class="block py-2 px-4 hover:bg-gray-100 {{Route::current()->uri() == 'about' ? 'font-bold' : ''}}">Apie</a>
                 </li>
+                @if(session('role')=="admin")
+                    <li>
+                        <a href="/logout" class="block py-2 px-4 hover:bg-gray-100">Atsijungti</a>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>

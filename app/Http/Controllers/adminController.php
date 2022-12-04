@@ -24,7 +24,7 @@ class adminController extends Controller
         if (!$data->isEmpty() && Hash::check(request('password'), $data[0]->password)) {
             if (count($data) > 0) {
                 Session::put('username', "Inga");
-                Session::put('role', "Admin");
+                Session::put('role', "admin");
                 return redirect('/');
             } else {
                 return redirect('/admin')->with('alert', 'Neteisingas slaptažodis');
@@ -37,4 +37,5 @@ class adminController extends Controller
         Session::flush();
         return redirect('/');
     }
+
 }
