@@ -16,6 +16,8 @@ class adminController extends Controller
 
     public function signIn()
     {
+        $google2fa = app('pragmarx.google2fa');
+
         request()->validate([
             'username' => 'required|max:254|exists:admin'
         ]);
@@ -25,9 +27,13 @@ class adminController extends Controller
             if (count($data) > 0) {
                 Session::put('username', "Inga");
                 Session::put('role', "admin");
-                return redirect('/');
+                if ($google2fa->verifyGoogle2FA($data[0]->google2fa_secret, request('otp')) == 1) {
+                    return redirect('/');
+                } else {
+                    return redirect('/admin')->with('error', 'Invalid OTP');
+                }
             } else {
-                return redirect('/admin')->with('alert', 'Neteisingas slaptažodis');
+                return redirect('/admin')->with('error', 'Invalid username or password');
             }
         }
     }
