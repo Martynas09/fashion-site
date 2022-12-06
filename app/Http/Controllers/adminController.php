@@ -19,7 +19,9 @@ class adminController extends Controller
         $google2fa = app('pragmarx.google2fa');
 
         request()->validate([
-            'username' => 'required|max:254|exists:admin'
+            'username' => 'required|max:254|exists:admin',
+            'password' => 'required',
+            'otp'=>'required'
         ]);
 
         $data = admin::select('*')->where([['username', '=', request('username')]])->get();

@@ -38,7 +38,8 @@ Route::post('/registerActivity/{id}', [groupActivityController::class, 'createGr
 
 //Posts
 Route::get('/posts', [postController::class, 'viewPosts']);
-Route::get('/viewPost/{id}', [postController::class, 'viewPost']);
+Route::get('/addPost', [postController::class, 'viewAddPost']);
+Route::post('/addPost', [postController::class, 'addPost']);
 
 //Admin
 Route::get('/admin', [adminController::class, 'showLogin']);

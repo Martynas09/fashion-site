@@ -13,7 +13,7 @@
 
                 <a>
                     @if($post->photos->count() > 0)
-                        <img class="object-cover w-full" src="/images/{{$post->photos[0]->photo_url}}">
+                        <img class="object-cover w-[900px]" src="/images/{{$post->photos[0]->photo_url}}">
                     @endif
                 </a>
                 <div class="p-5">
