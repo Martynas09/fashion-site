@@ -1,6 +1,7 @@
 @extends('layouts.base')
 @section('content')
     <div class="grid mt-6 grid-cols-1">
+        @include('layouts.alert')
             @foreach($services as $service)
             <div class="bg-gray-50 border drop-shadow-md md:w-[80rem] sm:w-[10rem] mb-9">
                 <div class="container px-6 py-10 mx-auto">

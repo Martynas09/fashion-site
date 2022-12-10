@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\group_activity;
+use App\Models\group_member;
 use Illuminate\Http\Request;
 use App\Models\admin;
 use Illuminate\Support\Facades\Hash;
@@ -38,6 +40,11 @@ class adminController extends Controller
                 return redirect('/admin')->with('error', 'Invalid username or password');
             }
         }
+    }
+    public function viewGroups()
+    {
+        $groupActivities = group_activity::all();
+        return view('AdminViewGroups', ['groupActivities' => $groupActivities]);
     }
 
     public function logout()

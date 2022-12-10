@@ -14,4 +14,8 @@ class group_activity extends Model
     {
         return $this->hasMany(photo::class);
     }
+    public function activityToGroup()
+    {
+        return $this->hasOne(group::class, 'group_activity_id', 'id');
+    }
 }

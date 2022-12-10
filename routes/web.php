@@ -48,5 +48,6 @@ Route::post('/addPost', [postController::class, 'addPost']);
 Route::get('/admin', [adminController::class, 'showLogin']);
 Route::get('/logout', [adminController::class, 'logout']);
 Route::post('/admin', [adminController::class, 'signIn']);
+Route::get('/viewGroups', [adminController::class, 'viewGroups']);
 
 

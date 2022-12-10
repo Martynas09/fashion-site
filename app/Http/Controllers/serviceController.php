@@ -75,7 +75,7 @@ class serviceController extends Controller
         Mail::to($email)->send(new Purchase($email,$name,$title));
 
 
-        return redirect('/services');
+        return redirect('/services')->with('success', 'Paslauga sėkmingai užsakyta!');
     }
 
     public function editService($id)
