@@ -50,6 +50,11 @@
                 {{$service[0]->price}}
             </p>
         </div>
+        <a href="/purchaseService/{{$service[0]->id}}">
+            <button class="absolute bottom-0 right-0 lg:mr-12 bg-gray-300 px-6 py-2 text-xl border-neutral-400 border text-gray-800 hover:border-neutral-400 hover:text-white hover:shadow-[inset_13rem_0_0_0] hover:shadow-gray-400 duration-[400ms,700ms] transition-[color,box-shadow]">
+                Užsakyti
+            </button>
+        </a>
     </div>
 
     </section>

@@ -4,7 +4,7 @@
         @foreach($posts as $post)
     <div class="mb-7 relative max-w-2xl lg:h-[650px] sm:h-[620px] sm:mb-6 bg-white border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
         <a href="#">
-            <img src="/images/{{$post->photos[0]->photo_url}}" alt="" />
+            <img class="max-h-[560px]" src="/images/{{$post->photos[0]->photo_url}}" alt="" />
         </a>
         <div class="p-2">
             <p class="mb-10 font-normal text-gray-900 dark:text-gray-400">{{$post->description}}</p>

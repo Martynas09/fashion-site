@@ -27,6 +27,9 @@ Route::get('/services', [serviceController::class, 'showServices']);
 Route::get('/addService', [serviceController::class, 'viewCreate']);
 Route::post('/addService', [serviceController::class, 'createService']);
 Route::get('/viewService/{id}', [serviceController::class, 'viewService']);
+//purchase
+Route::get('/purchaseService/{id}', [serviceController::class, 'viewPurchase']);
+Route::post('/purchaseService/{id}', [serviceController::class, 'purchaseService']);
 
 //Group activities
 Route::get('/groupActivities', [groupActivityController::class, 'viewActivities']);

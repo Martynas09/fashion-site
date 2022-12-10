@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\photo;
 use App\Models\service;
 use Illuminate\Http\Request;
+use App\Mail\Purchase;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class serviceController extends Controller
 {
@@ -54,6 +58,26 @@ class serviceController extends Controller
 
         return redirect('/services');
     }
+    public function viewPurchase($id){
+        $service = service::where('id', $id)->get();
+        return view('ServicePurchase', ['service' => $service]);
+    }
+    public function purchaseService(Request $request,$id){
+        request()->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+        ]);
+        $service = service::where('id', $id)->get();
+        $email=request('email');
+        $name=request('name');
+        $title=$service[0]->title;
+        Mail::to($email)->send(new Purchase($email,$name,$title));
+
+
+        return redirect('/services');
+    }
+
     public function editService($id)
     {
 
