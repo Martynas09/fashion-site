@@ -30,12 +30,13 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @if($groupActivity->activityToGroup->groupToMember->count()>0)
                     @foreach($groupActivity->activityToGroup->groupToMember as $groupmember)
-                        <tr class="bg-gray-200 border-b dark:border-gray-700">
-                            <th scope="row"
-                                class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <tr class="bg-gray-200 border-b dark:border-gray-700 text-gray-600">
+                            <td
+                                class="py-4 px-6">
                                 {{$groupmember->name}}
-                            </th>
+                            </td>
                             <td class="py-4 px-6">
                                 {{$groupmember->surname}}
                             </td>
@@ -53,14 +54,35 @@
                             </td>
                         </tr>
                     @endforeach
+                    @else
+                        <tr class="bg-gray-200 border-b dark:border-gray-700">
+                            <th scope="row"
+                                class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Nėra užsiregistravusių narių
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                    @endif
                     </tbody>
                 </table>
             </div>
+        @if($groupActivity->activityToGroup->groupToMember->count()>0)
             <a href="/notifyGroup/{{$groupActivity}}">
                 <button class="mt-2 lg:mr-12 bg-gray-300 px-2 py-1 text-lg border-neutral-400 border text-gray-800 hover:border-neutral-400 hover:text-white hover:shadow-[inset_13rem_0_0_0] hover:shadow-gray-400 duration-[400ms,700ms] transition-[color,box-shadow]">
                     Pranešti apie veiklos startą
                 </button>
             </a>
+            @endif
         @endforeach
+
     </div>
 @endsection
