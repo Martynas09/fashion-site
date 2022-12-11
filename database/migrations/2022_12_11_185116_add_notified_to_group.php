@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('admin', function (Blueprint $table) {
-            $table->string('google2fa_secret');
+        Schema::table('group', function (Blueprint $table) {
+            $table->boolean('notified')->default(false);
         });
     }
 
@@ -25,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('google2fa_secret');
+        Schema::table('group', function (Blueprint $table) {
+            $table->dropColumn('notified');
+        });
     }
 };

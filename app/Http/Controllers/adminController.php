@@ -52,5 +52,10 @@ class adminController extends Controller
         Session::flush();
         return redirect('/');
     }
+    public function viewNotify($id)
+    {
+        $groupActivity= group_activity::where('id', $id)->get();
+        return view('AdminNotifyGroup', ['groupActivity' => $groupActivity]);
+    }
 
 }

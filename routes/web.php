@@ -49,5 +49,7 @@ Route::get('/admin', [adminController::class, 'showLogin']);
 Route::get('/logout', [adminController::class, 'logout']);
 Route::post('/admin', [adminController::class, 'signIn']);
 Route::get('/viewGroups', [adminController::class, 'viewGroups']);
+Route::get('/notifyGroup/{id}', [adminController::class, 'viewNotify']);
+Route::post('/notifyGroup/{id}', [adminController::class, 'sendNotify']);
 
 
