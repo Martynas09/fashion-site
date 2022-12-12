@@ -1,6 +1,7 @@
 @extends('layouts.base')
 @section('content')
 <div class="max-w-sm mt-20">
+    @include('layouts.alert')
     <p class="text-center text-gray-700 text-xl font-semibold mb-5">
         Administratoriaus prisijungimas
     </p>

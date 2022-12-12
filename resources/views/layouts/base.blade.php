@@ -66,6 +66,10 @@
             Apie
         </a>
         @if(session('role')=="admin")
+            <a href="/viewGroups" class="flex text-gray-600 hover:text-black px-4 py-2
+                    cursor-pointer transition-colors duration-300 {{Route::current()->uri() == 'viewGroups' ? 'border border-black text-black' : 'text-gray-600'}}">
+                Grupės
+            </a>
             <a href="/logout" class="flex text-gray-600 font-bold hover:text-black px-4 py-2
                     cursor-pointer transition-colors duration-300">
                 Atsijungti

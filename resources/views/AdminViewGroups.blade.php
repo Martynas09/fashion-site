@@ -28,9 +28,9 @@
                     <p>galite išvalyti grupę.</p>
                 </div>
             @endif
-            <div class="overflow-x-auto relative">
+            <div class="overflow-x-auto relative border border-black">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b border-black">
                     <tr>
                         <th scope="col" class="py-3 px-6">
                             Vardas
@@ -49,6 +49,9 @@
                         </th>
                         <th scope="col" class="py-3 px-6">
                             Amžius
+                        </th>
+                        <th scope="col" class="py-3 px-6">
+                            Veiksmai
                         </th>
                     </tr>
                     </thead>
@@ -73,7 +76,19 @@
                                 {{$groupmember->gender}}
                             </td>
                             <td class="py-4 px-6">
-                                {{$groupmember->age}}
+                                {{$groupmember->age}} m.
+                            </td>
+                            <td class="py-4 px-6">
+                                <a href="/editMember/{{$groupmember->id}}">
+                                <button type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-1 py-1 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                </button>
+                                </a>
+                                <a href="/deleteMember/{{$groupmember->id}}">
+                                <button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-1 py-1 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                </button>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
@@ -82,6 +97,8 @@
                             <th scope="row"
                                 class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 Nėra užsiregistravusių narių
+                            </th>
+                            <th>
                             </th>
                             <th>
                             </th>

@@ -29,20 +29,22 @@ class adminController extends Controller
             'password' => 'required',
             'otp' => 'required'
         ]);
-
         $data = admin::select('*')->where([['username', '=', request('username')]])->get();
         if (!$data->isEmpty() && Hash::check(request('password'), $data[0]->password)) {
             if (count($data) > 0) {
                 Session::put('username', "Inga");
                 Session::put('role', "admin");
                 if ($google2fa->verifyGoogle2FA($data[0]->google2fa_secret, request('otp')) == 1) {
-                    return redirect('/');
+                    return redirect('/')->with('success', 'Sėkmingai prijungta prie administratoriaus paskyros');;
                 } else {
-                    return redirect('/admin')->with('error', 'Invalid OTP');
+                    return redirect('/admin')->with('error', 'Neteisingas OTP kodas');
                 }
             } else {
-                return redirect('/admin')->with('error', 'Invalid username or password');
+                return redirect('/admin')->with('error', 'Neteisingas slapyvardis arba slaptažodis');
             }
+        }
+        else{
+            return redirect('/admin')->with('error', 'Neteisingas slapyvardis arba slaptažodis');
         }
     }
 
@@ -83,7 +85,7 @@ class adminController extends Controller
         $group = group::select('*')->where('group_activity_id', '=', $id)->where('notified', '=', 0)->get();
         $groupMembers = group_member::where('group_id', $group[0]->id)->get();
         foreach ($groupMembers as $groupMember) {
-            //Mail::to($groupMember->email)->send(new notifyGroup($description, $time, $activity[0]->title, $address));
+            Mail::to($groupMember->email)->send(new notifyGroup($description, $time, $activity[0]->title, $address));
         }
         //update group notified status
         $grupe = group::where('group_activity_id', $id);
@@ -102,6 +104,34 @@ class adminController extends Controller
         $tempActivity=group_activity::where('id', $group->group_activity_id)->first();
         group_activity::where('id', $group->group_activity_id)->update(['free_spaces' => $tempActivity->size, 'start_time' => null]);
         return redirect('/viewGroups')->with('success', 'Grupė išvalyta.');
+    }
+    public function viewEditMember($id)
+    {
+        $member = group_member::where('id', $id)->get();
+        return view('AdminEditMember', ['member' => $member]);
+    }
+    public function editMember(Request $request, $id)
+    {
+        request()->validate([
+            'name' => 'required',
+            'surname' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+            'gender' => 'required',
+            'age' => 'required',
+        ]);
+        $member = group_member::where('id', $id);
+        $member->update(['name' => request('name'), 'surname' => request('surname'), 'email' => request('email'), 'phone_number' => request('phone_number'),'gender' => request('gender'), 'age' => request('age')]);
+        return redirect('/viewGroups')->with('success', 'Narys atnaujintas.');
+    }
+    public function deleteMember($id)
+    {
+        $member = group_member::where('id', $id)->first();
+        $group = group::where('id', $member->group_id)->first();
+        $activity = group_activity::where('id', $group->group_activity_id)->first();
+        group_activity::where('id', $group->group_activity_id)->update(['free_spaces' => $activity->free_spaces + 1]);
+        group_member::where('id', $id)->delete();
+        return redirect('/viewGroups')->with('success', 'Narys ištrintas.');
     }
 
 }

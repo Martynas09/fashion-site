@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('group_member', function (Blueprint $table) {
             $table->id();
             $table->string('email');
-            $table->enum('gender', ['men', 'woman']);
+            $table->enum('gender', ['vyras', 'moteris', 'nepateikta']);
             $table->integer('age');
             $table->string('name');
             $table->string('surname');
