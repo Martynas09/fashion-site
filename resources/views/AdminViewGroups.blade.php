@@ -1,10 +1,25 @@
 @extends('layouts.base')
 @section('content')
     <div class="grid mt-6 grid-cols-1">
+        @include('layouts.alert')
         @foreach($groupActivities as $groupActivity)
             <h1 class="font-bold text-2xl mt-6">Grupinė veikla "{{$groupActivity->title}}"</h1>
             <h2>Talpa:{{$groupActivity->size}}</h2>
             <h2>Liko vietų:{{$groupActivity->free_spaces}}</h2>
+        @if($groupActivity->activityToGroup->notified == 1)
+                <div class="flex">
+                <p>Grupė jau&nbsp;</p>
+                    <p class="text-green-700 font-bold">informuota&nbsp;</p>
+                <p>apie startą</p>
+                </div>
+                <h4>Starto data ir laikas: {{$groupActivity->start_time}}</h4>
+            @else
+            <div class="flex">
+                <p>Grupė&nbsp;</p>
+                <p class="text-red-700 font-bold">neinformuota&nbsp;</p>
+                <p>apie startą</p>
+            </div>
+            @endif
             <div class="overflow-x-auto relative">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -75,7 +90,7 @@
                     </tbody>
                 </table>
             </div>
-        @if($groupActivity->activityToGroup->groupToMember->count()>0)
+        @if($groupActivity->activityToGroup->groupToMember->count()>0 && $groupActivity->activityToGroup->notified == 0)
             <a href="/notifyGroup/{{$groupActivity->id}}">
                 <button class="mt-2 lg:mr-12 bg-gray-300 px-2 py-1 text-lg border-neutral-400 border text-gray-800 hover:border-neutral-400 hover:text-white hover:shadow-[inset_13rem_0_0_0] hover:shadow-gray-400 duration-[400ms,700ms] transition-[color,box-shadow]">
                     Pranešti apie veiklos startą

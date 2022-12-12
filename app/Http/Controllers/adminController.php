@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\notifyGroup;
+use App\Models\group;
 use App\Models\group_activity;
 use App\Models\group_member;
 use Illuminate\Http\Request;
 use App\Models\admin;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class adminController extends Controller
@@ -56,6 +59,37 @@ class adminController extends Controller
     {
         $groupActivity= group_activity::where('id', $id)->get();
         return view('AdminNotifyGroup', ['groupActivity' => $groupActivity]);
+    }
+    public function sendNotify(Request $request,$id)
+    {
+
+        request()->validate([
+            'description' => 'required',
+            'time' => 'required',
+            'address' => 'required',
+        ]);
+        //email information
+        $activity= group_activity::where('id', $id)->get();
+        $description= request('description');
+        $time= request('time');
+        $address= request('address');
+
+        //get group members to notify
+        $group = group::select('*')->where('group_activity_id', '=', $id)->where('notified', '=', 0)->get();
+        $groupMembers = group_member::where('group_id', $group[0]->id)->get();
+        foreach ($groupMembers as $groupMember) {
+            Mail::to($groupMember->email)->send(new notifyGroup($description,$time,$activity[0]->title,$address));
+        }
+        //update group notified status
+        $grupe = group::where('group_activity_id', $id);
+        $grupe->update(['notified' => 1]);
+        //update group activity start time
+        $activityupdate= group_activity::where('id', $id);
+        $activityupdate->update(['start_time' => $time]);
+        return redirect('/viewGroups')->with('success', 'Grupė informuota.');
+    }
+    public function clearGroup($id){
+
     }
 
 }

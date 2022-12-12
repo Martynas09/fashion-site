@@ -52,7 +52,7 @@
                     <p class="mt-3 text-sm text-gray-500  md:text-sm">
                         {{$groupActivity[0]->free_spaces}}
                     </p>
-                    @if($groupActivity[0]->free_spaces!=0)
+                    @if($groupActivity[0]->free_spaces!=0 && $groupActivity[0]->activityToGroup->notified == 0)
                     <a href="/registerActivity/{{$groupActivity[0]->id}}">
                         <button class="absolute bottom-0 right-0 lg:mr-12 bg-gray-300 px-6 py-2 text-xl border-neutral-400 border text-gray-800 hover:border-neutral-400 hover:text-white hover:shadow-[inset_13rem_0_0_0] hover:shadow-gray-400 duration-[400ms,700ms] transition-[color,box-shadow]">
                             Registruotis
@@ -62,7 +62,6 @@
                             <a class="absolute bottom-0 right-0 lg:mr-12 bg-gray-300 px-6 py-2 text-xl border-neutral-400 border text-gray-800">
                                 Nėra laisvų vietų
                             </a>
-                        </a>
                     @endif
                 </div>
             </div>
