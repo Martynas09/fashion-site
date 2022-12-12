@@ -45,7 +45,7 @@ Route::get('/posts', [postController::class, 'viewPosts']);
 Route::get('/addPost', [postController::class, 'viewAddPost'])->middleware(AdminPermissions::class);;
 Route::post('/addPost', [postController::class, 'addPost'])->middleware(AdminPermissions::class);;
 
-//Admin
+//Admin auth
 Route::get('/admin', [adminController::class, 'showLogin']);
 Route::get('/logout', [adminController::class, 'logout']);
 Route::post('/admin', [adminController::class, 'signIn']);

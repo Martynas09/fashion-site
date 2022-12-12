@@ -1,6 +1,16 @@
 @extends('layouts.base')
 @section('content')
     <div class="grid mt-6 grid-cols-1">
+        @if(session('role')=="admin")
+        <div class="mb-5 ml-2">
+            <a href="/addActivity">
+                <button type="button" class="flex text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-full text-lg px-4 py-4 text-center">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    Pridėti grupinę veiklą
+                </button>
+            </a>
+        </div>
+        @endif
         @foreach($groupActivities as $groupActivity)
             <div class="bg-gray-50 border drop-shadow-md md:w-[80rem] sm:w-[10rem] mb-9">
                 <div class="container px-6 py-10 mx-auto">
@@ -20,7 +30,7 @@
                                 {{$groupActivity->free_spaces}}
                             </p>
                             <a href="/viewGroupActivity/{{$groupActivity->id}}">
-                                <button class="absolute bottom-0 right-0 lg:mr-12 bg-gray-300 px-6 py-2 text-xl border-neutral-400 border text-gray-800 hover:border-neutral-400 hover:text-white hover:shadow-[inset_13rem_0_0_0] hover:shadow-gray-400 duration-[400ms,700ms] transition-[color,box-shadow]">
+                                <button type="button" class="absolute bottom-0 right-0 lg:mr-12 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-xl px-6 py-2 text-center">
                                     Plačiau
                                 </button>
                             </a>

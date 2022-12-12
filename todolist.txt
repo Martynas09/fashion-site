@@ -1,6 +1,15 @@
+//DONE
 pranešimas apie grupinės veiklos startą
 grupes memberių crud
+Facebook share posts
+
+//IN PROGRESS
 visas crud
 middleware
-store užsakytas paslaugas?
 visur alert naudot
+
+//TODO
+store užsakytas paslaugas?
+Apie page
+visi redagavimai
+visi delete
