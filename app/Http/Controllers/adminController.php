@@ -6,6 +6,7 @@ use App\Mail\notifyGroup;
 use App\Models\group;
 use App\Models\group_activity;
 use App\Models\group_member;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\admin;
 use Illuminate\Support\Facades\Hash;
@@ -26,7 +27,7 @@ class adminController extends Controller
         request()->validate([
             'username' => 'required|max:254|exists:admin',
             'password' => 'required',
-            'otp'=>'required'
+            'otp' => 'required'
         ]);
 
         $data = admin::select('*')->where([['username', '=', request('username')]])->get();
@@ -44,10 +45,12 @@ class adminController extends Controller
             }
         }
     }
+
     public function viewGroups()
     {
         $groupActivities = group_activity::all();
-        return view('AdminViewGroups', ['groupActivities' => $groupActivities]);
+        $currenttime = Carbon::now('GMT+2');
+        return view('AdminViewGroups', ['groupActivities' => $groupActivities, 'currenttime' => $currenttime]);
     }
 
     public function logout()
@@ -55,12 +58,14 @@ class adminController extends Controller
         Session::flush();
         return redirect('/');
     }
+
     public function viewNotify($id)
     {
-        $groupActivity= group_activity::where('id', $id)->get();
+        $groupActivity = group_activity::where('id', $id)->get();
         return view('AdminNotifyGroup', ['groupActivity' => $groupActivity]);
     }
-    public function sendNotify(Request $request,$id)
+
+    public function sendNotify(Request $request, $id)
     {
 
         request()->validate([
@@ -69,27 +74,34 @@ class adminController extends Controller
             'address' => 'required',
         ]);
         //email information
-        $activity= group_activity::where('id', $id)->get();
-        $description= request('description');
-        $time= request('time');
-        $address= request('address');
+        $activity = group_activity::where('id', $id)->get();
+        $description = request('description');
+        $time = request('time');
+        $address = request('address');
 
         //get group members to notify
         $group = group::select('*')->where('group_activity_id', '=', $id)->where('notified', '=', 0)->get();
         $groupMembers = group_member::where('group_id', $group[0]->id)->get();
         foreach ($groupMembers as $groupMember) {
-            Mail::to($groupMember->email)->send(new notifyGroup($description,$time,$activity[0]->title,$address));
+            //Mail::to($groupMember->email)->send(new notifyGroup($description, $time, $activity[0]->title, $address));
         }
         //update group notified status
         $grupe = group::where('group_activity_id', $id);
         $grupe->update(['notified' => 1]);
         //update group activity start time
-        $activityupdate= group_activity::where('id', $id);
+        $activityupdate = group_activity::where('id', $id);
         $activityupdate->update(['start_time' => $time]);
         return redirect('/viewGroups')->with('success', 'Grupė informuota.');
     }
-    public function clearGroup($id){
 
+    public function clearGroup($id)
+    {
+        group_member::where('group_id', $id)->delete();
+        $group = group::where('id', $id)->first();
+        group::where('id', $id)->update(['notified' => 0]);
+        $tempActivity=group_activity::where('id', $group->group_activity_id)->first();
+        group_activity::where('id', $group->group_activity_id)->update(['free_spaces' => $tempActivity->size, 'start_time' => null]);
+        return redirect('/viewGroups')->with('success', 'Grupė išvalyta.');
     }
 
 }

@@ -48,8 +48,10 @@ Route::post('/addPost', [postController::class, 'addPost']);
 Route::get('/admin', [adminController::class, 'showLogin']);
 Route::get('/logout', [adminController::class, 'logout']);
 Route::post('/admin', [adminController::class, 'signIn']);
+//Groups
 Route::get('/viewGroups', [adminController::class, 'viewGroups']);
 Route::get('/notifyGroup/{id}', [adminController::class, 'viewNotify']);
 Route::post('/notifyGroup/{id}', [adminController::class, 'sendNotify']);
+Route::get('/clearGroup/{id}', [adminController::class, 'clearGroup']);
 
 

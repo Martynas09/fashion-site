@@ -4,6 +4,7 @@
         @include('layouts.alert')
         @foreach($groupActivities as $groupActivity)
             <h1 class="font-bold text-2xl mt-6">Grupinė veikla "{{$groupActivity->title}}"</h1>
+        @if($groupActivity->start_time==null || $currenttime < $groupActivity->start_time)
             <h2>Talpa:{{$groupActivity->size}}</h2>
             <h2>Liko vietų:{{$groupActivity->free_spaces}}</h2>
         @if($groupActivity->activityToGroup->notified == 1)
@@ -19,6 +20,13 @@
                 <p class="text-red-700 font-bold">neinformuota&nbsp;</p>
                 <p>apie startą</p>
             </div>
+            @endif
+            @else
+                <div class="flex">
+                    <p>Grupinė veikla jau&nbsp;</p>
+                    <p class="text-green-700 font-bold">įvyko,&nbsp;</p>
+                    <p>galite išvalyti grupę.</p>
+                </div>
             @endif
             <div class="overflow-x-auto relative">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -94,6 +102,13 @@
             <a href="/notifyGroup/{{$groupActivity->id}}">
                 <button class="mt-2 lg:mr-12 bg-gray-300 px-2 py-1 text-lg border-neutral-400 border text-gray-800 hover:border-neutral-400 hover:text-white hover:shadow-[inset_13rem_0_0_0] hover:shadow-gray-400 duration-[400ms,700ms] transition-[color,box-shadow]">
                     Pranešti apie veiklos startą
+                </button>
+            </a>
+            @endif
+        @if($currenttime > $groupActivity->start_time && $groupActivity->start_time != null)
+            <a onclick="return confirm('Ar tikrai norite išvalyti grupę?')" href="/clearGroup/{{$groupActivity->activityToGroup->id}}">
+                <button class="mt-2 lg:mr-12 bg-gray-300 px-2 py-1 text-lg border-neutral-400 border text-gray-800 hover:border-neutral-400 hover:text-white hover:shadow-[inset_13rem_0_0_0] hover:shadow-gray-400 duration-[400ms,700ms] transition-[color,box-shadow]">
+                    Išvalyti grupę
                 </button>
             </a>
             @endif
