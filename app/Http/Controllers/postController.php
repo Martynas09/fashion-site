@@ -45,10 +45,12 @@ class postController extends Controller
 
     }
     public function viewEditPost($id){
+        if(post::find($id)==null) {return back();}
         $post = post::where('id', $id)->get();
         return view('PostEdit', ['post' => $post]);
     }
     public function editPost(Request $request,$id){
+        if(post::find($id)==null) {return back();}
 
         if(request('description') != null){
             post::where('id', $id)->update([
@@ -70,6 +72,7 @@ class postController extends Controller
 
     }
     public function deletePost($id){
+        if(post::find($id)==null) {return back();}
         photo::where('post_id', $id)->delete();
         post::where('id', $id)->delete();
         return redirect('/posts')->with('success', 'Įrašas ištrintas!');

@@ -64,13 +64,14 @@ class adminController extends Controller
 
     public function viewNotify($id)
     {
+        if(group_activity::find($id)==null) {return back();}
         $groupActivity = group_activity::where('id', $id)->get();
         return view('AdminNotifyGroup', ['groupActivity' => $groupActivity]);
     }
 
     public function sendNotify(Request $request, $id)
     {
-
+        if(group_activity::find($id)==null) {return back();}
         request()->validate([
             'description' => 'required',
             'time' => 'required',
@@ -99,6 +100,9 @@ class adminController extends Controller
 
     public function clearGroup($id)
     {
+        if(group::find($id)==null){
+            return back();
+        }
         group_member::where('group_id', $id)->delete();
         $group = group::where('id', $id)->first();
         group::where('id', $id)->update(['notified' => 0]);
@@ -108,11 +112,14 @@ class adminController extends Controller
     }
     public function viewEditMember($id)
     {
+        if(group_member::find($id)==null) {return back();}
+
         $member = group_member::where('id', $id)->get();
         return view('AdminEditMember', ['member' => $member]);
     }
     public function editMember(Request $request, $id)
     {
+        if(group_member::find($id)==null) {return back();}
         request()->validate([
             'name' => 'required',
             'surname' => 'required',
@@ -127,6 +134,7 @@ class adminController extends Controller
     }
     public function deleteMember($id)
     {
+        if(group_member::find($id)==null) {return back();}
         $member = group_member::where('id', $id)->first();
         $group = group::where('id', $member->group_id)->first();
         $activity = group_activity::where('id', $group->group_activity_id)->first();
@@ -135,6 +143,7 @@ class adminController extends Controller
         return redirect('/viewGroups')->with('success', 'Narys ištrintas.');
     }
     public function deletePhoto($id){
+        if(photo::find($id)==null) {return back();}
         photo::where('id', $id)->delete();
         return back()->with('success', 'Nuotrauka ištrinta.');
     }

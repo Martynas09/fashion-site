@@ -19,6 +19,7 @@ class serviceController extends Controller
     }
     public function viewService($id)
     {
+        if(service::find($id)==null) {return back();}
         $service = service::where('id', $id)->get();
         return view('ServiceView', ['service' => $service]);
     }

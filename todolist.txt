@@ -16,3 +16,4 @@ Apie page
 paslaugos peržiūra
 grupinės veiklos peržiūra
 move group functions to controller
+modalai

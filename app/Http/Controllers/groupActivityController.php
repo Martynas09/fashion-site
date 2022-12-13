@@ -18,6 +18,7 @@ class groupActivityController extends Controller
 
     public function viewActivity($id)
     {
+        if(group_activity::find($id)==null) {return back();}
         $groupActivity = group_activity::where('id', $id)->get();
         return view('GroupActivityView', ['groupActivity' => $groupActivity]);
     }
@@ -65,11 +66,13 @@ class groupActivityController extends Controller
     }
     public function viewRegister($id)
     {
+        if(group_activity::find($id)==null) {return back();}
         $groupActivity = group_activity::where('id', $id)->get();
         return view('GroupActivityRegister', ['groupActivity' => $groupActivity]);
     }
     public function createGroupMemeber($id)
     {
+        if(group_activity::find($id)==null) {return back();}
         request()->validate([
             'name' => 'required',
             'surname' => 'required',
@@ -100,11 +103,13 @@ class groupActivityController extends Controller
     }
     public function viewEdit($id)
     {
+        if(group_activity::find($id)==null) {return back();}
         $activity = group_activity::where('id', $id)->get();
         return view('GroupActivityEdit', ['activity' => $activity]);
     }
     public function editActivity(Request $request,$id)
     {
+        if(group_activity::find($id)==null) {return back();}
         request()->validate([
             'title' => 'required',
             'description' => 'required',
@@ -132,6 +137,7 @@ class groupActivityController extends Controller
 
     public function deleteActivity($id)
     {
+        if(group_activity::find($id)==null) {return back();}
         $group=group::where('group_activity_id',$id)->get();
         group_member::where('group_id',$group[0]->id)->delete();
         group::where('group_activity_id',$id)->delete();
