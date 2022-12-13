@@ -6,6 +6,7 @@ use App\Mail\notifyGroup;
 use App\Models\group;
 use App\Models\group_activity;
 use App\Models\group_member;
+use App\Models\photo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\admin;
@@ -132,6 +133,10 @@ class adminController extends Controller
         group_activity::where('id', $group->group_activity_id)->update(['free_spaces' => $activity->free_spaces + 1]);
         group_member::where('id', $id)->delete();
         return redirect('/viewGroups')->with('success', 'Narys ištrintas.');
+    }
+    public function deletePhoto($id){
+        photo::where('id', $id)->delete();
+        return back()->with('success', 'Nuotrauka ištrinta.');
     }
 
 }

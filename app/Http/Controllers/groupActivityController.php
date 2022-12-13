@@ -21,11 +21,6 @@ class groupActivityController extends Controller
         $groupActivity = group_activity::where('id', $id)->get();
         return view('GroupActivityView', ['groupActivity' => $groupActivity]);
     }
-
-    public function editActivity($id)
-    {
-
-    }
     public function viewCreate()
     {
         return view('GroupActivityAdd');
@@ -66,7 +61,7 @@ class groupActivityController extends Controller
             }
         }
 
-        return redirect('/groupActivities');
+        return redirect('/groupActivities')->with('success', 'Veikla sukurta!');
     }
     public function viewRegister($id)
     {
@@ -101,20 +96,47 @@ class groupActivityController extends Controller
 
 
 
-        return redirect('/viewGroupActivity/' . $id);
+        return redirect('/groupActivities')->with('success', 'Užsiregistravote grupinėje veikloje!');;
     }
+    public function viewEdit($id)
+    {
+        $activity = group_activity::where('id', $id)->get();
+        return view('GroupActivityEdit', ['activity' => $activity]);
+    }
+    public function editActivity(Request $request,$id)
+    {
+        request()->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'size' => 'required',
+        ]);
+        group_activity::where('id', $id)->update([
+            'title' => request('title'),
+            'description' => request('description'),
+            'size' => request('size'),
+        ]);
+
+        if ($request->hasfile('photo_url')) {
+            foreach ($request->file('photo_url') as $image) {
+                $name = $image->getClientOriginalName();
+                $image->move(public_path() . '/images/', $name);
+                $form = new photo();
+                $form->photo_url = $name;
+                $form->group_activity_id = $id;
+                $form->save();
+            }
+        }
+        return redirect('/groupActivities')->with('success', 'Grupinė veikla atnaujinta!');
+    }
+
+
     public function deleteActivity($id)
     {
-
-    }
-
-    public function removeActivity($id)
-    {
         $group=group::where('group_activity_id',$id)->get();
-        $groupActivity = group_activity::where('id', $id)->get();
-        $groupActivity->delete();
-        $group->delete();
-        return redirect('/groupActivities');
+        group_member::where('group_id',$group[0]->id)->delete();
+        group::where('group_activity_id',$id)->delete();
+        group_activity::where('id', $id)->delete();
+        return redirect('/groupActivities')->with('success', 'Grupinė veikla pašalinta!');
     }
 
 }

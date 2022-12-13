@@ -31,21 +31,47 @@ class postController extends Controller
 
         if($request->hasfile('photo_url'))
         {
-                $name=$request->file('photo_url')->getClientOriginalName();
-                $request->file('photo_url')->move(public_path().'/images/', $name);
-                $form= new photo();
-                $form->photo_url=$name;
-                $form->post_id=$post->id;
+            foreach($request->file('photo_url') as $image) {
+                $name = $image->getClientOriginalName();
+                $image->move(public_path() . '/images/', $name);
+                $form = new photo();
+                $form->photo_url = $name;
+                $form->post_id = $post->id;
                 $form->save();
+            }
         }
 
         return redirect('/posts');
 
     }
-    public function editPost($id){
+    public function viewEditPost($id){
+        $post = post::where('id', $id)->get();
+        return view('PostEdit', ['post' => $post]);
+    }
+    public function editPost(Request $request,$id){
+
+        if(request('description') != null){
+            post::where('id', $id)->update([
+                'description' => request('description'),
+            ]);
+        }
+        if($request->hasfile('photo_url'))
+        {
+            foreach($request->file('photo_url') as $image) {
+                $name = $image->getClientOriginalName();
+                $image->move(public_path() . '/images/', $name);
+                $form = new photo();
+                $form->photo_url = $name;
+                $form->post_id = $id;
+                $form->save();
+            }
+        }
+    return redirect('/posts')->with('success', 'Įrašas atnaujintas!');
 
     }
-    public function removePost($id){
-
+    public function deletePost($id){
+        photo::where('post_id', $id)->delete();
+        post::where('id', $id)->delete();
+        return redirect('/posts')->with('success', 'Įrašas ištrintas!');
     }
 }

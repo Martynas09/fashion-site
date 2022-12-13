@@ -28,6 +28,9 @@ Route::get('/services', [serviceController::class, 'showServices']);
 Route::get('/addService', [serviceController::class, 'viewCreate'])->middleware(AdminPermissions::class);;
 Route::post('/addService', [serviceController::class, 'createService'])->middleware(AdminPermissions::class);;
 Route::get('/viewService/{id}', [serviceController::class, 'viewService']);
+Route::get('/editService/{id}', [serviceController::class, 'viewEdit'])->middleware(AdminPermissions::class);;
+Route::post('/editService/{id}', [serviceController::class, 'editService'])->middleware(AdminPermissions::class);;
+Route::get('/deleteService/{id}', [serviceController::class, 'deleteService'])->middleware(AdminPermissions::class);;
 //purchase
 Route::get('/purchaseService/{id}', [serviceController::class, 'viewPurchase']);
 Route::post('/purchaseService/{id}', [serviceController::class, 'purchaseService']);
@@ -39,11 +42,17 @@ Route::get('/addActivity', [groupActivityController::class, 'viewCreate'])->midd
 Route::post('/addActivity', [groupActivityController::class, 'createActivity'])->middleware(AdminPermissions::class);;
 Route::get('/registerActivity/{id}', [groupActivityController::class, 'viewRegister']);
 Route::post('/registerActivity/{id}', [groupActivityController::class, 'createGroupMemeber']);
+Route::get('/editActivity/{id}', [groupActivityController::class, 'viewEdit'])->middleware(AdminPermissions::class);;
+Route::post('/editActivity/{id}', [groupActivityController::class, 'editActivity'])->middleware(AdminPermissions::class);;
+Route::get('/deleteActivity/{id}', [groupActivityController::class, 'deleteActivity'])->middleware(AdminPermissions::class);;
 
 //Posts
 Route::get('/posts', [postController::class, 'viewPosts']);
 Route::get('/addPost', [postController::class, 'viewAddPost'])->middleware(AdminPermissions::class);;
 Route::post('/addPost', [postController::class, 'addPost'])->middleware(AdminPermissions::class);;
+Route::get('/editPost/{id}', [postController::class, 'viewEditPost'])->middleware(AdminPermissions::class);;
+Route::post('/editPost/{id}', [postController::class, 'editPost'])->middleware(AdminPermissions::class);;
+Route::get('/deletePost/{id}', [postController::class, 'deletePost'])->middleware(AdminPermissions::class);;
 
 //Admin auth
 Route::get('/admin', [adminController::class, 'showLogin']);
@@ -57,5 +66,6 @@ Route::get('/clearGroup/{id}', [adminController::class, 'clearGroup'])->middlewa
 Route::get('/editMember/{id}', [adminController::class, 'viewEditMember'])->middleware(AdminPermissions::class);;
 Route::post('/editMember/{id}', [adminController::class, 'editMember'])->middleware(AdminPermissions::class);;
 Route::get('/deleteMember/{id}', [adminController::class, 'deleteMember'])->middleware(AdminPermissions::class);;
-
+//Photos
+Route::get('/deletePhoto/{id}', [adminController::class, 'deletePhoto'])->middleware(AdminPermissions::class);;
 

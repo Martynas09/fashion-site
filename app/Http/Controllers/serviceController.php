@@ -77,14 +77,44 @@ class serviceController extends Controller
 
         return redirect('/services')->with('success', 'Paslauga sėkmingai užsakyta!');
     }
-
-    public function editService($id)
-    {
-
+    public function viewEdit($id){
+        $service = service::where('id', $id)->get();
+        return view('ServiceEdit', ['service' => $service]);
     }
-    public function removeService($id)
-    {
+    public function editService(Request $request,$id){
+        request()->validate([
+            'title' => 'required',
+            'price' => 'required',
+            'description' => 'required',
 
+        ]);
+        service::where('id', $id)->update([
+            'title' => request('title'),
+            'price' => request('price'),
+            'description' => request('description'),
+        ]);
+
+        if($request->hasfile('photo_url'))
+        {
+            foreach($request->file('photo_url') as $image)
+            {
+                $name=$image->getClientOriginalName();
+                $image->move(public_path().'/images/', $name);
+                $form= new photo();
+                $form->photo_url=$name;
+                $form->service_id=$id;
+                $form->save();
+            }
+        }
+
+        return redirect('/services')->with('success', 'Paslauga atnaujinta!');
+    }
+
+    public function deleteService($id)
+    {
+        photo::where('service_id', $id)->delete();
+        service::where('id', $id)->delete();
+        return redirect('/services')->with('success', 'Paslauga sėkmingai ištrinta!');
     }
 
 }
