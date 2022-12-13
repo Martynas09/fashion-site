@@ -29,7 +29,7 @@
 </head>
 <body>
 <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
-<nav class="flex justify-around py-4 bg-white/80 backdrop-blur-md shadow-md w-full fixed top-0 left-0 right-0 z-50">
+<nav class="flex justify-around py-4 bg-white/80 backdrop-blur-md shadow-md w-full fixed top-0 left-0 right-0 z-40">
     <!-- Logo Container -->
     <div class="flex items-center">
         <!-- Logo -->

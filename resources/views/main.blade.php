@@ -1,9 +1,9 @@
 @extends('layouts.base')
 @section('content')
-    <div class="grid lg:grid-cols-2 gap-16 mt-12 sm:grid-cols-1">
+    <div class="grid lg:grid-cols-2 gap-16 mt-12 sm:grid-cols-1 ">
         @foreach($posts as $post)
     <div class="mb-7 relative max-w-2xl lg:h-[650px] sm:h-[620px] sm:mb-6 bg-white border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-        <a href="#">
+        <a class="flex justify-center" href="#">
             <img class="max-h-[560px]" src="/images/{{$post->photos[0]->photo_url}}" alt="" />
         </a>
         <div class="p-2">

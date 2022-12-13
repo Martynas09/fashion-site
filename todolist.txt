@@ -5,10 +5,10 @@ Facebook share posts
 visi redagavimai
 visi delete
 visas crud
+visur alert naudot
 
 //IN PROGRESS
 middleware
-visur alert naudot
 
 //TODO
 store užsakytas paslaugas?
