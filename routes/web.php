@@ -69,3 +69,6 @@ Route::get('/deleteMember/{id}', [adminController::class, 'deleteMember'])->midd
 //Photos
 Route::get('/deletePhoto/{id}', [adminController::class, 'deletePhoto'])->middleware(AdminPermissions::class);;
 
+Route::fallback(function () {
+    return redirect('/');
+});
