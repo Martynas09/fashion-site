@@ -86,7 +86,7 @@ class serviceController extends Controller
         $purchasedservice->service_id = $id;
         $purchasedservice->order_number = '#'.str_pad($id + 1, 8, "0", STR_PAD_LEFT);
         $purchasedservice->save();
-        //Mail::to($email)->send(new Purchase($email,$name,$title)); //TODO: uncomment when mail is set up
+        Mail::to($email)->send(new Purchase($email,$name,$title));
 
 
         return redirect('/services')->with('success', 'Paslauga sėkmingai užsakyta!');
