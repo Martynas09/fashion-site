@@ -12,6 +12,7 @@
         </div>
         @endif
             @include('layouts.alert')
+            @if($groupActivities->count()>0)
         @foreach($groupActivities as $groupActivity)
             <div class="bg-gray-50 border drop-shadow-md md:w-[80rem] sm:w-[10rem] mb-9">
                 <div class="container px-6 py-10 mx-auto">
@@ -77,5 +78,9 @@
                 </div>
             </div>
         @endforeach
+            @else
+                <div class="mt-4 flex flex-col items-center justify-center">
+                    <h1 class="text-2xl font-bold text-gray-700 dark:text-white">Nėra sukurtų veiklų.</h1>
+                @endif
     </div>
 @endsection

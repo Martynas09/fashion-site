@@ -74,7 +74,7 @@
                     cursor-pointer transition-colors duration-300 {{Route::current()->uri() == 'purchasedServices' ? 'border border-black text-black' : 'text-gray-600'}}">
                 Užsakytos paslaugos
             </a>
-            <a href="/logout" class="flex text-red-800 font-bold hover:text-black px-4 py-2
+            <a href="/logout" class="flex text-red-400 font-bold hover:text-black px-4 py-2
                     cursor-pointer transition-colors duration-300">
                 Atsijungti
             </a>
@@ -108,7 +108,7 @@
                         <a href="/purchasedServices" class="block py-2 px-4 hover:bg-gray-100 {{Route::current()->uri() == 'purchasedServices' ? 'font-bold' : ''}}">Užsakytos paslaugos</a>
                     </li>
                     <li>
-                        <a href="/logout" class="block py-2 px-4 hover:bg-gray-100">Atsijungti</a>
+                        <a href="/logout" class="text-red-400 block py-2 px-4 hover:bg-gray-100">Atsijungti</a>
                     </li>
                 @endif
             </ul>

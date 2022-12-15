@@ -17,6 +17,7 @@
             </div>
         @endif
             @include('layouts.alert')
+            @if($posts->count()>0)
         @foreach($posts as $post)
             <div class="relative bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 mb-10">
                 <div class="pl-5 py-2 text-xl flex items-center">
@@ -121,5 +122,9 @@
                 </div>
             </div>
         @endforeach
+            @else
+                <div class="mt-9 flex flex-col items-center justify-center">
+                    <h1 class="text-2xl font-bold text-gray-700 dark:text-white">Nėra sukurtų įrašų.</h1>
+                    @endif
     </div>
 @endsection

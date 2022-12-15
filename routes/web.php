@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\groupActivityController;
+use App\Http\Controllers\groupController;
 use App\Http\Controllers\mainController;
 use App\Http\Controllers\postController;
 use App\Http\Controllers\serviceController;
@@ -64,13 +65,13 @@ Route::get('/admin', [adminController::class, 'showLogin']);
 Route::get('/logout', [adminController::class, 'logout']);
 Route::post('/admin', [adminController::class, 'signIn']);
 //Groups
-Route::get('/viewGroups', [adminController::class, 'viewGroups'])->middleware(AdminPermissions::class);
-Route::get('/notifyGroup/{id}', [adminController::class, 'viewNotify'])->middleware(AdminPermissions::class);
-Route::post('/notifyGroup/{id}', [adminController::class, 'sendNotify'])->middleware(AdminPermissions::class);
-Route::get('/clearGroup/{id}', [adminController::class, 'clearGroup'])->middleware(AdminPermissions::class);
-Route::get('/editMember/{id}', [adminController::class, 'viewEditMember'])->middleware(AdminPermissions::class);
-Route::post('/editMember/{id}', [adminController::class, 'editMember'])->middleware(AdminPermissions::class);
-Route::get('/deleteMember/{id}', [adminController::class, 'deleteMember'])->middleware(AdminPermissions::class);
+Route::get('/viewGroups', [groupController::class, 'viewGroups'])->middleware(AdminPermissions::class);
+Route::get('/notifyGroup/{id}', [groupController::class, 'viewNotify'])->middleware(AdminPermissions::class);
+Route::post('/notifyGroup/{id}', [groupController::class, 'sendNotify'])->middleware(AdminPermissions::class);
+Route::get('/clearGroup/{id}', [groupController::class, 'clearGroup'])->middleware(AdminPermissions::class);
+Route::get('/editMember/{id}', [groupController::class, 'viewEditMember'])->middleware(AdminPermissions::class);
+Route::post('/editMember/{id}', [groupController::class, 'editMember'])->middleware(AdminPermissions::class);
+Route::get('/deleteMember/{id}', [groupController::class, 'deleteMember'])->middleware(AdminPermissions::class);
 //Photos
 Route::get('/deletePhoto/{id}', [adminController::class, 'deletePhoto'])->middleware(AdminPermissions::class);
 
