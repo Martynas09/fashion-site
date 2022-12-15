@@ -13,7 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('group_activity', function (Blueprint $table) {
+        Schema::create('group_activity', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('description');
+            $table->integer('size');
+            $table->integer('free_spaces');
             $table->dateTime('start_time')->default(null);
         });
     }
@@ -25,8 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('group_activity', function (Blueprint $table) {
-            $table->dropColumn('start_time');
-        });
+        Schema::dropIfExists('group_activity');
     }
 };

@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('group_activity', function (Blueprint $table) {
+        Schema::create('purchased_service', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('description');
-            $table->integer('size');
-            $table->integer('free_spaces');
+            $table->integer('service_id');
+            $table->string('email');
+            $table->string('name');
+            $table->string('phone_number');
+            $table->enum('status',['užsakyta', 'vykdoma', 'užbaigta']);
+            $table->date('created_at');
         });
     }
 
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('group_activity');
+        Schema::dropIfExists('purchased_service');
     }
 };

@@ -2,6 +2,7 @@
 @section('content')
     <div class="grid mt-6 grid-cols-1">
         @include('layouts.alert')
+        @if($groupActivities->count()>0)
         @foreach($groupActivities as $groupActivity)
             <h1 class="font-bold text-2xl mt-6 mb-1">Grupinė veikla "{{$groupActivity->title}}"</h1>
         @if($groupActivity->start_time==null || $currenttime < $groupActivity->start_time)
@@ -130,6 +131,10 @@
             </a>
             @endif
         @endforeach
+        @else
+            <div class="mt-4 flex flex-col items-center justify-center">
+                <h1 class="text-2xl font-bold text-gray-700 dark:text-white">Nėra sukurtų veiklų.</h1>
+            @endif
 
     </div>
 @endsection

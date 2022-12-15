@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\photo;
+use App\Models\purchased_service;
 use App\Models\service;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Mail\Purchase;
 use Illuminate\Http\JsonResponse;
@@ -73,7 +76,17 @@ class serviceController extends Controller
         $email=request('email');
         $name=request('name');
         $title=$service[0]->title;
-        Mail::to($email)->send(new Purchase($email,$name,$title));
+
+        $purchasedservice = new purchased_service();
+        $purchasedservice->name = request('name');
+        $purchasedservice->email = request('email');
+        $purchasedservice->phone_number = request('phone_number');
+        $purchasedservice->status = 'užsakyta';
+        $purchasedservice->created_at = Carbon::now();
+        $purchasedservice->service_id = $id;
+        $purchasedservice->order_number = '#'.str_pad($id + 1, 8, "0", STR_PAD_LEFT);
+        $purchasedservice->save();
+        //Mail::to($email)->send(new Purchase($email,$name,$title)); //TODO: uncomment when mail is set up
 
 
         return redirect('/services')->with('success', 'Paslauga sėkmingai užsakyta!');
@@ -116,6 +129,39 @@ class serviceController extends Controller
         photo::where('service_id', $id)->delete();
         service::where('id', $id)->delete();
         return redirect('/services')->with('success', 'Paslauga sėkmingai ištrinta!');
+    }
+
+    public function viewPurchasedServices(){
+        $services = purchased_service::orderBy('created_at', 'asc')->get();
+        $finishedServices=purchased_service::where('status','užbaigta')->orderBy('created_at', 'asc')->get();
+        return view('AdminViewPurchasedService', ['services' => $services,'finishedServices'=>$finishedServices]);
+    }
+    public function viewPurchasedServiceEdit($id){
+        $service = purchased_service::where('id', $id)->get();
+        $services=service::all();
+        return view('AdminViewPurchasedServiceEdit', ['service' => $service,'services'=>$services]);
+    }
+    public function editPurchasedService(Request $request,$id){
+        request()->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+            'status' => 'required',
+            'service_id' => 'required',
+        ]);
+        purchased_service::where('id', $id)->update([
+            'name' => request('name'),
+            'email' => request('email'),
+            'phone_number' => request('phone_number'),
+            'status' => request('status'),
+            'service_id' => request('service_id'),
+        ]);
+        return redirect('/purchasedServices')->with('success', 'Užsakymas atnaujintas!');
+    }
+    public function deletePurchasedService($id)
+    {
+        purchased_service::where('id', $id)->delete();
+        return redirect('/purchasedServices')->with('success', 'Užsakymas sėkmingai ištrintas!');
     }
 
 }

@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('group', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->foreignId('group_activity_id')->references('id')->on('group_activity')->onDelete('cascade');
+            $table->boolean('notified')->default(false);
         });
     }
 

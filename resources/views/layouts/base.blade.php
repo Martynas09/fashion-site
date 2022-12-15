@@ -70,6 +70,10 @@
                     cursor-pointer transition-colors duration-300 {{Route::current()->uri() == 'viewGroups' ? 'border border-black text-black' : 'text-gray-600'}}">
                 Grupės
             </a>
+            <a href="/purchasedServices" class="flex text-gray-600 hover:text-black px-4 py-2
+                    cursor-pointer transition-colors duration-300 {{Route::current()->uri() == 'purchasedServices' ? 'border border-black text-black' : 'text-gray-600'}}">
+                Užsakytos paslaugos
+            </a>
             <a href="/logout" class="flex text-red-800 font-bold hover:text-black px-4 py-2
                     cursor-pointer transition-colors duration-300">
                 Atsijungti
@@ -97,6 +101,12 @@
                     <a href="/about" class="block py-2 px-4 hover:bg-gray-100 {{Route::current()->uri() == 'about' ? 'font-bold' : ''}}">Apie</a>
                 </li>
                 @if(session('role')=="admin")
+                    <li>
+                        <a href="/viewGroups" class="block py-2 px-4 hover:bg-gray-100 {{Route::current()->uri() == 'viewGroups' ? 'font-bold' : ''}}">Grupės</a>
+                    </li>
+                    <li>
+                        <a href="/purchasedServices" class="block py-2 px-4 hover:bg-gray-100 {{Route::current()->uri() == 'purchasedServices' ? 'font-bold' : ''}}">Užsakytos paslaugos</a>
+                    </li>
                     <li>
                         <a href="/logout" class="block py-2 px-4 hover:bg-gray-100">Atsijungti</a>
                     </li>
