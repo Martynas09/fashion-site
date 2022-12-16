@@ -52,6 +52,10 @@ class postController extends Controller
     public function editPost(Request $request,$id){
         if(post::find($id)==null) {return back();}
 
+        request()->validate([
+            'photo_url.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
         if(request('description') != null){
             post::where('id', $id)->update([
                 'description' => request('description'),

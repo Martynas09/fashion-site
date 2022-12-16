@@ -1,9 +1,9 @@
 @extends('layouts.base')
 @section('content')
 
-    <section class="bg-gray-100 border rounded-lg drop-shadow-md lg:w-[80rem] sm:w-[10rem] h-[800px] mt-2">
+    <section class="bg-gray-100 border rounded-lg drop-shadow-md lg:w-[80rem] sm:w-[10rem] h-[640px] mt-2">
         @if($groupActivity[0]->photos->count()>1)
-            <div class="max-w-2xl w-[80rem] h-[50rem] ml-5 mt-10">
+            <div class="max-w-2xl w-[80rem] h-[50rem] ml-5">
                 <div id="default-carousel" class="relative mb-4 mt-4 ml-4" data-carousel="static">
                     <!-- Carousel wrapper -->
                     <div class="overflow-hidden relative h-56 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
@@ -35,7 +35,7 @@
                     </button>
                 </div>
                 @else
-                    <div class="max-w-2xl w-[80rem] h-[50rem] ml-5 mt-10 relative mb-4 mt-4 ml-4 overflow-hidden relative h-56 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
+                    <div class="max-w-2xl w-[80rem] h-[50rem] relative mb-4 mt-10 ml-4 overflow-hidden relative h-56 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
                         <img src="/images/{{$groupActivity[0]->photos[0]->photo_url}}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
                     </div>
                 @endif
@@ -43,14 +43,14 @@
                     <a href="#" class="block mt-4 text-2xl font-semibold text-gray-800 hover:underline md:text-3xl">
                         {{$groupActivity[0]->title}}
                     </a>
-                    <p class="mt-3 text-sm text-gray-500  md:text-sm">
+                    <p class="mt-3 text-sm text-gray-500">
                         {{$groupActivity[0]->description}}
                     </p>
-                    <p class="mt-3 text-sm text-gray-500  md:text-sm">
-                        {{$groupActivity[0]->size}}
+                    <p class="mt-3 text-xl font-bold text-gray-900">
+                        Talpa:{{$groupActivity[0]->size}}
                     </p>
-                    <p class="mt-3 text-sm text-gray-500  md:text-sm">
-                        {{$groupActivity[0]->free_spaces}}
+                    <p class="mt-3 text-2xl font-bold text-gray-900 ">
+                        Liko vietų:{{$groupActivity[0]->free_spaces}}
                     </p>
                     @if($groupActivity[0]->free_spaces!=0 && $groupActivity[0]->activityToGroup->notified == 0)
                     <a href="/registerActivity/{{$groupActivity[0]->id}}">
@@ -59,7 +59,7 @@
                         </button>
                     </a>
                     @else
-                            <a class="absolute bottom-0 right-0 lg:mr-12 bg-gray-300 px-6 py-2 text-xl border-neutral-400 border text-gray-800">
+                            <a class="absolute bottom-0 right-0 lg:mr-12 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-xl px-6 py-2 text-center">
                                 Nėra laisvų vietų
                             </a>
                     @endif

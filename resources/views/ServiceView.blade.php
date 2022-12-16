@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('content')
-
-    <section class="bg-gray-100 border rounded-lg drop-shadow-md lg:w-[80rem] sm:w-[10rem] h-[800px] mt-2">
+    <section class="mt-12 bg-gray-100 border rounded-lg drop-shadow-md lg:w-[80rem] sm:w-[10rem] h-[500px] mt-2">
+        <div class="mt-8 grid lg:grid-cols-2 gap-36 sm:grid-cols-1">
         @if($service[0]->photos->count()>1)
             <div class="max-w-2xl w-[80rem] h-[50rem] ml-5 mt-10">
                 <div id="default-carousel" class="relative mb-4 mt-4 ml-4" data-carousel="static">
@@ -56,25 +56,27 @@
                              class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
                     </div>
                 @endif
-                <div class="relative mt-6 lg:w-1/2 lg:mt-0 lg:mx-6 ">
+                <div class=" mt-6 lg:w-1/2 lg:mt-0 lg:mx-6 ">
                     <a href="#" class="block mt-4 text-2xl font-semibold text-gray-800 hover:underline md:text-3xl">
                         {{$service[0]->title}}
                     </a>
                     <p class="mt-3 text-sm text-gray-500  md:text-sm">
                         {{$service[0]->description}}
                     </p>
-                    <p class="mt-3 text-sm text-gray-500  md:text-sm">
-                        {{$service[0]->price}}
+                    <p class="mt-16 text-3xl font-bold text-gray-900  md:text-sm">
+                        KAINA
                     </p>
+                    <p class=" text-3xl font-bold text-gray-900 dark:text-white">
+                        €{{$service[0]->price}}
+                    </p>
+                    <a href="/purchaseService/{{$service[0]->id}}">
+                        <button class=" mt-16 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-xl px-6 py-2 text-center">
+                            Užsakyti
+                        </button>
+                    </a>
                 </div>
-                <a href="/purchaseService/{{$service[0]->id}}">
-                    <button
-                        class="absolute bottom-0 right-0 lg:mr-12 bg-gray-300 px-6 py-2 text-xl border-neutral-400 border text-gray-800 hover:border-neutral-400 hover:text-white hover:shadow-[inset_13rem_0_0_0] hover:shadow-gray-400 duration-[400ms,700ms] transition-[color,box-shadow]">
-                        Užsakyti
-                    </button>
-                </a>
+
             </div>
-
+        </div>
     </section>
-
 @endsection

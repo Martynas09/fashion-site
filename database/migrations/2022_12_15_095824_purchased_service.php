@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone_number');
             $table->enum('status',['užsakyta', 'vykdoma', 'užbaigta']);
             $table->date('created_at');
+            $table->string('order_number');
         });
     }
 

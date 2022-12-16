@@ -62,11 +62,11 @@
                             <p class="mt-3 ml-1 text-md text-gray-500">
                                 {{$groupActivity->description}}
                             </p>
-                            <p class="absolute bottom-2 left-0 text-3xl font-bold text-gray-900 dark:text-white">
-                                {{$groupActivity->size}}
+                            <p class="absolute bottom-12 left-0 text-2xl text-gray-900 dark:text-white">
+                                Talpa:{{$groupActivity->size}}
                             </p>
-                            <p class="absolute bottom-2 left-0 text-3xl font-bold text-gray-900 dark:text-white">
-                                {{$groupActivity->free_spaces}}
+                            <p class="absolute bottom-2 left-0 text-2xl text-gray-900 dark:text-white">
+                                Liko vietų:{{$groupActivity->free_spaces}}
                             </p>
                             <a href="/viewGroupActivity/{{$groupActivity->id}}">
                                 <button type="button" class="absolute bottom-0 right-0 lg:mr-12 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-xl px-6 py-2 text-center">

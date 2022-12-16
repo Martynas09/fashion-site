@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('post', function (Blueprint $table) {
             $table->id();
-            $table->string('description')->default(null);
+            $table->string('description')->nullable();
             $table->date('created_at');
         });
     }

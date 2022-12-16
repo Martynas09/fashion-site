@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->integer('size');
             $table->integer('free_spaces');
-            $table->dateTime('start_time')->default(null);
+            $table->dateTime('start_time')->nullable();
         });
     }
 

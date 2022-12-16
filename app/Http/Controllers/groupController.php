@@ -74,7 +74,7 @@ class groupController extends Controller
         if(group_activity::find($id)==null) {return back();}
         request()->validate([
             'description' => 'required',
-            'time' => 'required',
+            'time' => 'required|after:now',
             'address' => 'required',
         ]);
         //email information

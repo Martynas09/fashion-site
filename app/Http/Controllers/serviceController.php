@@ -39,7 +39,6 @@ class serviceController extends Controller
             'photo_url.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'price' => 'required',
             'description' => 'required',
-
         ]);
         $service = new service();
         $service->title = request('title');
@@ -67,6 +66,7 @@ class serviceController extends Controller
         return view('ServicePurchase', ['service' => $service]);
     }
     public function purchaseService(Request $request,$id){
+        if(service::find($id)==null) {return back();}
         request()->validate([
             'name' => 'required',
             'email' => 'required',
@@ -84,7 +84,7 @@ class serviceController extends Controller
         $purchasedservice->status = 'užsakyta';
         $purchasedservice->created_at = Carbon::now();
         $purchasedservice->service_id = $id;
-        $purchasedservice->order_number = '#'.str_pad($id + 1, 8, "0", STR_PAD_LEFT);
+        $purchasedservice->order_number = '#'.str_pad($id + rand(2,50), 8, "0", STR_PAD_LEFT);
         $purchasedservice->save();
         Mail::to($email)->send(new Purchase($email,$name,$title));
 
@@ -92,14 +92,17 @@ class serviceController extends Controller
         return redirect('/services')->with('success', 'Paslauga sėkmingai užsakyta!');
     }
     public function viewEdit($id){
+        if(service::find($id)==null) {return back();}
         $service = service::where('id', $id)->get();
         return view('ServiceEdit', ['service' => $service]);
     }
     public function editService(Request $request,$id){
+        if(service::find($id)==null) {return back();}
         request()->validate([
             'title' => 'required',
             'price' => 'required',
             'description' => 'required',
+            'photo_url.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
         ]);
         service::where('id', $id)->update([
@@ -126,6 +129,7 @@ class serviceController extends Controller
 
     public function deleteService($id)
     {
+        if(service::find($id)==null) {return back();}
         photo::where('service_id', $id)->delete();
         service::where('id', $id)->delete();
         return redirect('/services')->with('success', 'Paslauga sėkmingai ištrinta!');
@@ -137,11 +141,13 @@ class serviceController extends Controller
         return view('AdminViewPurchasedService', ['services' => $services,'finishedServices'=>$finishedServices]);
     }
     public function viewPurchasedServiceEdit($id){
+        if(purchased_service::find($id)==null) {return back();}
         $service = purchased_service::where('id', $id)->get();
         $services=service::all();
         return view('AdminViewPurchasedServiceEdit', ['service' => $service,'services'=>$services]);
     }
     public function editPurchasedService(Request $request,$id){
+        if(purchased_service::find($id)==null) {return back();}
         request()->validate([
             'name' => 'required',
             'email' => 'required',
@@ -160,6 +166,7 @@ class serviceController extends Controller
     }
     public function deletePurchasedService($id)
     {
+        if(purchased_service::find($id)==null) {return back();}
         purchased_service::where('id', $id)->delete();
         return redirect('/purchasedServices')->with('success', 'Užsakymas sėkmingai ištrintas!');
     }
