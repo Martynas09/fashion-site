@@ -115,10 +115,15 @@ class groupActivityController extends Controller
             'description' => 'required',
             'size' => 'required',
         ]);
+
+        $takenspaces=group_activity::where('id', $id)->first()->size-group_activity::where('id', $id)->first()->free_spaces;
+        if($takenspaces>request('size')){return redirect('/groupActivities')->with('error', 'Nepavyko redaguoti, nes jau užimta daugiau vietų nei nurodyta');}
+        else{
         group_activity::where('id', $id)->update([
             'title' => request('title'),
             'description' => request('description'),
             'size' => request('size'),
+            'free_spaces' => request('size')-$takenspaces,
         ]);
 
         if ($request->hasfile('photo_url')) {
@@ -132,6 +137,7 @@ class groupActivityController extends Controller
             }
         }
         return redirect('/groupActivities')->with('success', 'Grupinė veikla atnaujinta!');
+        }
     }
 
 
