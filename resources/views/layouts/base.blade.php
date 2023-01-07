@@ -35,8 +35,7 @@
         <!-- Logo -->
         <a href="/" class="cursor-pointer">
             <img class="h-12 object-cover"
-                 src="/logo.png">
-            </h3>
+                 src="/logo.png" alt="logo">
         </a>
     </div>
     <!-- Links Section -->
