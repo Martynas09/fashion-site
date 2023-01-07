@@ -118,12 +118,12 @@
             </div>
         @if($groupActivity->activityToGroup->groupToMember->count()>0 && $groupActivity->activityToGroup->notified == 0)
             <a href="/notifyGroup/{{$groupActivity->id}}">
-                <button class="mt-2 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-lg px-2 py-1 text-center">Pranešti apie veiklos startą</button>
+                <button class="mt-2 mb-2 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-lg px-2 py-1 text-center">Pranešti apie veiklos startą</button>
             </a>
             @endif
         @if($currenttime > $groupActivity->start_time && $groupActivity->start_time != null)
             <a onclick="return confirm('Ar tikrai norite išvalyti grupę?')" href="/clearGroup/{{$groupActivity->activityToGroup->id}}">
-                <button class="mt-2 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-lg px-2 py-1 text-center">Išvalyti grupę</button>
+                <button class="mt-2 mb-2 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-lg px-2 py-1 text-center">Išvalyti grupę</button>
             </a>
             @endif
         @endforeach

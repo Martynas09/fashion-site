@@ -55,6 +55,9 @@
             <div class="mb-6">
                 <label for="base-input" class=" mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Užsakyta paslauga:</label>
                 <select name="service_id" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        @if($service[0]->purchasedService == null)
+                        <option value="{{$service[0]->service_id}}" selected>Paslauga ištrinta</option>
+                        @endif
                     @foreach($services as $temp)
                         @if($temp->id == $service[0]->service_id)
                             <option value="{{$temp->id}}" selected>{{$temp->title}}</option>
