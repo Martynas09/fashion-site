@@ -22,7 +22,7 @@
                             @if(session('role')=="admin")
                                 <a href="/editActivity/{{$groupActivity->id}}">
                                     <button data-popover-target="popover-edit" type="button"
-                                            class="absolute top-0 right-24 text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-1 py-1 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
+                                            class="lg:absolute top-0 right-24 text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-1 py-1 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
                                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -40,7 +40,7 @@
                                 <a onclick="return confirm('Ar tikrai norite pašalinti veiklą?')"
                                    href="/deleteActivity/{{$groupActivity->id}}">
                                     <button data-popover-target="popover-remove" type="button"
-                                            class="absolute top-0 right-10 text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-1 py-1 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                                            class="lg:absolute top-0 right-10 text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-1 py-1 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -59,15 +59,21 @@
                             <a href="#" class="block text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">
                                 {{$groupActivity->title}}
                             </a>
-                            <p class="mt-3 ml-1 text-md text-gray-500">
+                            <p class="mt-3 ml-1 text-md text-gray-500 hidden md:flex">
                                 {{$groupActivity->description}}
                             </p>
-                            <p class="absolute bottom-12 left-0 text-2xl text-gray-900 dark:text-white">
-                                Talpa:{{$groupActivity->size}}
-                            </p>
-                            <p class="absolute bottom-2 left-0 text-2xl text-gray-900 dark:text-white">
-                                Liko vietų:{{$groupActivity->free_spaces}}
-                            </p>
+                                @if($groupActivity->free_spaces!=0 && $groupActivity->activityToGroup->notified == 0)
+                                    <p class="absolute bottom-12 left-0 text-2xl text-gray-900 dark:text-white hidden md:flex">
+                                        Talpa:{{$groupActivity->size}}
+                                    </p>
+                                    <p class="absolute bottom-2 left-0 text-2xl text-gray-900 dark:text-white hidden md:flex">
+                                        Liko vietų:{{$groupActivity->free_spaces}}
+                                    </p>
+                                @else
+                                    <p class="absolute bottom-2 left-0 text-2xl text-gray-900 dark:text-white hidden md:flex">
+                                        Ši veikla jau startavo.
+                                    </p>
+                                @endif
                             <a href="/viewGroupActivity/{{$groupActivity->id}}">
                                 <button type="button" class="absolute bottom-0 right-0 lg:mr-12 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-xl px-6 py-2 text-center">
                                     Plačiau

@@ -1,13 +1,13 @@
 @extends('layouts.base')
 @section('content')
-
-    <section class="bg-gray-100 border rounded-lg drop-shadow-md lg:w-[80rem] sm:w-[10rem] h-[640px] mt-10">
-        <div class="mt-4 grid lg:grid-cols-2 gap-36 sm:grid-cols-1">
+    @include('layouts.backButton')
+    <section class="bg-gray-100 border rounded-lg drop-shadow-md lg:w-[80rem] sm:w-[10rem] lg:h-[640px] mt-10">
+        <div class="mt-4 grid lg:grid-cols-2 gap-36 lg:w-[80rem] sm:w-[10rem]">
             <div>
                 @if($groupActivity[0]->photos->count()>1)
-                        <div id="default-carousel" class="relative mb-4 mt-4 ml-4 w-[40rem]" data-carousel="static">
+                        <div id="default-carousel" class="relative mb-4 mt-4 w-[40rem]" data-carousel="static">
                             <!-- Carousel wrapper -->
-                            <div class="max-w-2xl w-[80rem] h-[50rem] mb-4 mt-4 ml-4 overflow-hidden relative h-56 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
+                            <div class="max-w-2xl w-[80rem] h-[50rem] mb-4 mt-4 ml-4 overflow-hidden relative rounded-lg sm:h-64 xl:h-80 2xl:h-96">
                                 <!-- Item 1 -->
                                 @foreach($groupActivity[0]->photos as $photo)
                                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
@@ -58,13 +58,13 @@
                                      alt="...">
                             </div>
                         @endif
+                        @if($groupActivity[0]->free_spaces!=0 && $groupActivity[0]->activityToGroup->notified == 0)
                         <p class="mt-14 ml-6 text-xl font-bold text-gray-900">
                             Talpa: {{$groupActivity[0]->size}}
                         </p>
                         <p class="mt-3 ml-6 text-2xl font-bold text-gray-900 ">
                             Liko vietų: {{$groupActivity[0]->free_spaces}}
                         </p>
-                        @if($groupActivity[0]->free_spaces!=0 && $groupActivity[0]->activityToGroup->notified == 0)
                             <a href="/registerActivity/{{$groupActivity[0]->id}}">
                                 <button
                                     class="absolute bottom-8 left-6 lg:mr-12 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-xl px-6 py-2 text-center">
@@ -72,9 +72,9 @@
                                 </button>
                             </a>
                         @else
-                            <a class="absolute bottom-8 left-6 lg:mr-12 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-xl px-6 py-2 text-center">
-                                Nėra laisvų vietų
-                            </a>
+                        <p class="mt-3 ml-6 text-2xl font-bold text-gray-900 ">
+                            Ši veikla jau startavo.
+                        </p>
                         @endif
                     </div>
                     <div class="relative mt-6 lg:mt-0 lg:mx-6 ">

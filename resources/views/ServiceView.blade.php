@@ -1,5 +1,6 @@
 @extends('layouts.base')
 @section('content')
+    @include('layouts.backButton')
     <section class="mt-12 bg-gray-100 border rounded-lg drop-shadow-md lg:w-[80rem] sm:w-[10rem] h-[500px] mt-2">
         <div class="mt-8 grid lg:grid-cols-2 gap-36 sm:grid-cols-1">
         @if($service[0]->photos->count()>1)

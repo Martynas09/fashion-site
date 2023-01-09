@@ -28,7 +28,7 @@
                             @if(session('role')=="admin")
                                 <a href="/editService/{{$service->id}}">
                                     <button data-popover-target="popover-edit" type="button"
-                                            class="absolute top-0 right-24 text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-1 py-1 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
+                                            class="lg:absolute top-0 right-24 text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-1 py-1 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
                                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -46,7 +46,7 @@
                                 <a onclick="return confirm('Ar tikrai norite pašalinti paslaugą?')"
                                    href="/deleteService/{{$service->id}}">
                                     <button data-popover-target="popover-remove" type="button"
-                                            class="absolute top-0 right-10 text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-1 py-1 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                                            class="lg:absolute top-0 right-10 text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-1 py-1 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -66,10 +66,10 @@
                                class="block text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">
                                 {{$service->title}}
                             </a>
-                            <p class="mt-3 ml-1 text-md text-gray-500">
+                            <p class="mt-3 ml-1 text-md text-gray-500 hidden md:flex">
                                 {{$service->description}}
                             </p>
-                            <p class="absolute bottom-2 left-0 text-3xl font-bold text-gray-900 dark:text-white">
+                            <p class="absolute bottom-2 left-0 text-3xl font-bold text-gray-900 dark:text-white hidden md:flex">
                                 €{{$service->price}}
                             </p>
                             <a href="/viewService/{{$service->id}}">

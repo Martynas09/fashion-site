@@ -2,6 +2,7 @@
 @section('content')
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <div class="mt-10 max-w-sm">
+        @include('layouts.backButton')
         <p class="text-center text-gray-700 text-xl font-semibold mb-5">
             Paslaugos "{{$service[0]->title}}" redagavimas
         </p>
@@ -32,6 +33,7 @@
             <div class="grid mb-2 grid-cols-2 border border-black rounded-lg">
                 @foreach($service[0]->photos as $photo)
                     <div class="flex">
+                        @if($service[0]->photos->count() > 1)
                     <a onclick="return confirm('Ar tikrai norite pašalinti nuotrauką?')"
                        href="/deletePhoto/{{$photo->id}}">
                         <button data-popover-target="popover-remove" type="button"
@@ -50,6 +52,7 @@
                             </div>
                             <div data-popper-arrow></div>
                         </div>
+                        @endif
                     <img class="my-2 mx-2 h-[120px] w-[170px]" src="/images/{{$photo->photo_url}}" alt="photo">
                     </div>
                 @endforeach

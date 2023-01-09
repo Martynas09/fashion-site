@@ -2,6 +2,7 @@
 @section('content')
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <div class="mt-10 max-w-sm">
+        @include('layouts.backButton')
         <p class="text-center text-gray-700 text-xl font-semibold mb-5">
             Grupinės veiklos "{{$groupActivity[0]->title}}" starto pranešimas
         </p>
